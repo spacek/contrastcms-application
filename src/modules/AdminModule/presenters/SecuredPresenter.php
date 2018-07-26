@@ -2,7 +2,6 @@
 
 namespace ContrastCms\Application\AdminModule;
 
-
 abstract class SecuredPresenter extends AdminBasePresenter
 {
 
@@ -10,7 +9,7 @@ abstract class SecuredPresenter extends AdminBasePresenter
 	{
 		parent::startup();
 
-		if ( ! ($this->user->isLoggedIn()) || (!$this->user->isInRole('admin'))) {
+		if (!($this->user->isLoggedIn()) || (!$this->user->isInRole('admin'))) {
 			$this->redirect('Sign:in');
 		}
 	}

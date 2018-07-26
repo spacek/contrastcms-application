@@ -16,7 +16,7 @@ abstract class AdminBasePresenter extends \BasePresenter
 		parent::startup();
 
 		$this->user->setAuthenticator($this->context->getService("authenticator"));
-		$this->setLayout(__DIR__ . '/../templates/layoutLogged');
+		$this->setLayout(__DIR__ . '/../templates/@layoutLogged.latte');
 		$this->sessionData = $this->getSession('admin');
 	}
 

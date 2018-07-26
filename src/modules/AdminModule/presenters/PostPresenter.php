@@ -2,46 +2,26 @@
 
 namespace ContrastCms\Application\AdminModule;
 
+use ContrastCms\VisualPaginator\VisualPaginator;
 use Nette\Application\BadRequestException;
 use Nette\Utils\Strings;
 
-final class PostPresenter extends SecuredPresenter
+class PostPresenter extends SecuredPresenter
 {
 
 	public $attachmentTypes = array(
 		"text" => "Textový box",
-		"newsletter" => "Přihlášení k newsletteru",
-		"rozdelovnik" => "Rozdělovník",
-		"2cols" => "2 sloupcový textový box",
-		"cf" => "Kontaktní formulář",
-		"gallery" => "Galerie - prvních 6 fotek",
-		"gallery_full" => "Galerie - celý výpis",
-		"map" => "Mapa s kontaktem",
-		"alert" => "Aktuální upozornění",
-		"services" => "Výpis služeb v matici",
-		"changes" => "Změny a upozornění",
-		"news" => "Výpis posledních 3 novinek",
-		"lecturers" => "Slider - lektoři",
-		"text_narrow" => "Úzký textový box",
-		"text_right" => "Široký textový box, text vpravo",
-		"text_left" => "Široký textový box, text vlevo",
-		"pricelist" => "Ceník",
-		"icons" => "Ikony",
-		"video-gallery" => "Videa",
-		"table" => "Tabulka",
-		"schedule" => "Rozvrh",
-		"page-intro" => "Úvod stránky",
-		"other-news" => "Další novinky",
-		"news-list" => "Výpis novinek",
-		"lecturers-list" => "Výpis lektorů",
+		"image" => "Obrázek",
 	);
 
-	public function startup() {
+	public function startup()
+	{
 		parent::startup();
 		$this->template->attachmentTypes = $this->attachmentTypes;
 	}
 
-	public function actionEdit($id, $lang = "cs_CZ") {
+	public function actionEdit($id, $lang = "cs_CZ")
+	{
 
 		$this["postForm"]["type"]->setValue("edit");
 		$this["postForm"]["id"]->setValue($id);
@@ -53,7 +33,7 @@ final class PostPresenter extends SecuredPresenter
 
 			// try to find by ID
 			$item = $this->context->getService("postRepository")->findById($id)->order("lang = 'cs_CZ' DESC")->fetch();
-			if($item) {
+			if ($item) {
 				$values = $item->toArray();
 				$values["lang"] = $lang;
 				$this->context->getService("postRepository")->insert($values);
@@ -61,7 +41,7 @@ final class PostPresenter extends SecuredPresenter
 
 			$item = $this->context->getService("postRepository")->findByIdAndLang($id, $lang);
 			$record = $item->fetch();
-			if(!$record) {
+			if (!$record) {
 				throw new BadRequestException;
 			}
 		}
@@ -75,7 +55,7 @@ final class PostPresenter extends SecuredPresenter
 		$this->template->parent = $record->parent;
 		$this->template->parentParent = $record->parent;
 		$this->template->image = $record->file_id;
-		if($parent) {
+		if ($parent) {
 			$this->template->parentParent = $parent->parent;
 		}
 		$this->template->lang = $record->lang;
@@ -83,41 +63,44 @@ final class PostPresenter extends SecuredPresenter
 		$this->template->values = $record;
 	}
 
-    public function actionDuplicate($from, $language = "cs_CZ") {
+	public function actionDuplicate($from, $language = "cs_CZ")
+	{
 
-        // Crete new page
+		// Crete new page
 
-        $item = $this->context->getService("postRepository")->findByIdAndLang($from, $language, false);
-        $record = $item->fetch();
-        $data = (array)$record->toArray();
-        unset($data["id"]);
-        $data["title"] = "Copy: " . $record["title"];
-        $newItem = $this->context->getService("postRepository")->insert($data);
+		$item = $this->context->getService("postRepository")->findByIdAndLang($from, $language, false);
+		$record = $item->fetch();
+		$data = (array)$record->toArray();
+		unset($data["id"]);
+		$data["title"] = "Copy: " . $record["title"];
+		$newItem = $this->context->getService("postRepository")->insert($data);
 
-        // duplicate attachments
-        $attachments = $this->context->getService("postAttachmentRepository")->findBy(array("lang" => $language, "parent" => $from), "id ASC");
+		// duplicate attachments
+		$attachments = $this->context->getService("postAttachmentRepository")->findBy(array("lang" => $language, "parent" => $from), "id ASC");
 
-        foreach($attachments as $attachment) {
-            $attachmentData = $attachment->toArray();
-            $attachmentData['lang'] = $language;
-            $attachmentData['parent'] = $newItem->id;
-            unset($attachmentData['id']);
-            $this->context->getService("postAttachmentRepository")->insert($attachmentData);
+		foreach ($attachments as $attachment) {
+			$attachmentData = $attachment->toArray();
+			$attachmentData['lang'] = $language;
+			$attachmentData['parent'] = $newItem->id;
+			unset($attachmentData['id']);
+			$this->context->getService("postAttachmentRepository")->insert($attachmentData);
 
-        }
+		}
 
-        $this->flashMessage("Úspěšně zkopírováno");
-        $this->redirect("Homepage:default");
-    }
+		$this->flashMessage("Úspěšně zkopírováno");
+		$this->redirect("Homepage:default");
+	}
 
-	public function actionAddAttachment($id, $lang) {
+	public function actionAddAttachment($id, $lang)
+	{
 		$this["attachmentForm"]["operation_type"]->setValue("insert");
 		$this["attachmentForm"]["parent"]->setValue($id);
 		$this["attachmentForm"]["lang"]->setValue($lang);
 	}
 
 
-	public function actionMoveItem() {
+	public function actionMoveItem()
+	{
 		$json = $_POST["json"];
 		$data = json_decode($json);
 		$data = $data[0];
@@ -135,11 +118,12 @@ final class PostPresenter extends SecuredPresenter
 		return $form;
 	}
 
-	public function _changeStrucutre($data) {
+	public function _changeStrucutre($data)
+	{
 		$post = $this->context->getService("postRepository");
-		if(isset($data->id) && isset($data->children)) {
+		if (isset($data->id) && isset($data->children)) {
 			$weight = count($data->children) + 1;
-			foreach($data->children as $child) {
+			foreach ($data->children as $child) {
 				$weight--;
 				$post->update(array("parent" => $data->id, "priority" => $weight), $child->id);
 
@@ -148,8 +132,9 @@ final class PostPresenter extends SecuredPresenter
 		}
 	}
 
-	public function actionSaveCollapsion() {
-		if(isset($_POST['id']) && isset($_POST['value'])) {
+	public function actionSaveCollapsion()
+	{
+		if (isset($_POST['id']) && isset($_POST['value'])) {
 			$this->context->getService("postRepository")->update(array("is_unfolded" => (int)$_POST['value']), (int)$_POST['id']);
 		}
 
@@ -158,7 +143,8 @@ final class PostPresenter extends SecuredPresenter
 	}
 
 
-	public function actionAttachments($id, $lang) {
+	public function actionAttachments($id, $lang)
+	{
 
 
 		$this["postForm"]["type"]->setValue("edit");
@@ -174,7 +160,7 @@ final class PostPresenter extends SecuredPresenter
 		$filter->limit = 500;
 		$this->template->limit = $filter->limit;
 
-		$vp = new \VisualPaginator($this, 'vp');
+		$vp = new VisualPaginator();
 		$vp->loadState($this->request->getParameters());
 		$paginator = $vp->getPaginator();
 		$paginator->itemsPerPage = $filter->limit;
@@ -182,14 +168,16 @@ final class PostPresenter extends SecuredPresenter
 
 		$this->template->results = $this->context->getService("postAttachmentRepository")->fetchByParentAndLang($id, $lang, $paginator->offset, $paginator->itemsPerPage)->order("priority DESC");
 
+		$this->addComponent($vp, "vp");
+
 	}
 
-	public function actionReorderAttachments() {
-		var_dump($_POST["id"]);
+	public function actionReorderAttachments()
+	{
 		$rows = explode(";", $_POST["rows"]);
 
-		foreach($rows as $key => $row) {
-			if(!$row) {
+		foreach ($rows as $key => $row) {
+			if (!$row) {
 				unset($rows[$key]);
 			}
 		}
@@ -197,17 +185,19 @@ final class PostPresenter extends SecuredPresenter
 		$max = count($rows) + 1;
 
 		$i = 0;
-		foreach($rows as $row) {
+		foreach ($rows as $row) {
 			$i++;
 			$priority = ($max - $i) * 10;
 			$rowRecord = $this->context->getService("postAttachmentRepository")->findById($row)->fetch();
 			$rowRecord->update(["priority" => $priority]);
 		}
 
-		echo 1; die;
+		echo 1;
+		die;
 	}
 
-	public function actionEditAttachment($id) {
+	public function actionEditAttachment($id)
+	{
 		$this["attachmentForm"]["operation_type"]->setValue("edit");
 
 		// Load other data
@@ -226,14 +216,15 @@ final class PostPresenter extends SecuredPresenter
 		$this['attachmentForm']->setDefaults($record);
 	}
 
-	public function actionAdd($id) {
+	public function actionAdd($id)
+	{
 		$this->template->id = $id;
 		$this->template->parent = $id;
 
 		$parent = $this->context->getService("postRepository")->findById($id)->fetch();
 
 		$this->template->parentParent = $id;
-		if($parent) {
+		if ($parent) {
 			$this->template->parentParent = $parent->parent;
 		}
 
@@ -242,7 +233,8 @@ final class PostPresenter extends SecuredPresenter
 		$this["postForm"]["id"]->setValue($id);
 	}
 
-	public function actionCopy($id, $lang) {
+	public function actionCopy($id, $lang)
+	{
 		$item = $this->context->getService("postRepository")->findByIdAndLang($id, $lang, false);
 		$record = $item->fetch();
 		$data = (array)$record->toArray();
@@ -253,18 +245,17 @@ final class PostPresenter extends SecuredPresenter
 	}
 
 
-	public function actionDelete($id, $lang = "cs_CZ") {
-
-		// todo check permission
-
+	public function actionDelete($id, $lang = "cs_CZ")
+	{
 		$postRepository = $this->context->getService("postRepository");
-		$postRepository->deleteById($id); // todo: do recursive delete
+		$postRepository->deleteById($id);
 
 		$this->flashMessage("Úspěšně odstraněno.");
 		$this->redirect("Homepage:default", array('lang' => $lang));
 	}
 
-	public function actionDeleteFile($fileId, $fieldToNull, $parentId) {
+	public function actionDeleteFile($fileId, $fieldToNull, $parentId)
+	{
 
 		$item = $this->context->getService("postRepository")->findById($parentId)->fetch();
 		$item->update(array($fieldToNull => null));
@@ -274,18 +265,18 @@ final class PostPresenter extends SecuredPresenter
 		$this->redirect("Post:edit", $parentId);
 	}
 
-	public function actionDeleteAttachment($id) {
-
-		// todo check permission
+	public function actionDeleteAttachment($id)
+	{
 
 		$postRepository = $this->context->getService("postAttachmentRepository");
-		$postRepository->deleteById($id); // todo: do recursive delete
+		$postRepository->deleteById($id);
 
 		$this->redirectUrl($_SERVER['HTTP_REFERER']);
 		exit;
 	}
 
-	public function actionPublish($id, $lang = "cs_CZ") {
+	public function actionPublish($id, $lang = "cs_CZ")
+	{
 		$postRepository = $this->context->getService("postRepository");
 		$postRepository->updateByIdAndLang(array(
 			'is_public' => 1
@@ -295,7 +286,8 @@ final class PostPresenter extends SecuredPresenter
 		exit;
 	}
 
-	public function actionUnpublish($id, $lang = "cs_CZ") {
+	public function actionUnpublish($id, $lang = "cs_CZ")
+	{
 		$postRepository = $this->context->getService("postRepository");
 		$postRepository->updateByIdAndLang(array(
 			'is_public' => 0
@@ -315,7 +307,8 @@ final class PostPresenter extends SecuredPresenter
 		return $form;
 	}
 
-	private function storeDataIntoSession($values) {
+	private function storeDataIntoSession($values)
+	{
 		$session = $this->context->getService("session");
 
 		foreach ($values as $key => $val) {
@@ -335,14 +328,14 @@ final class PostPresenter extends SecuredPresenter
 
 		$values->slug = Strings::webalize($values->title);
 
-		if ((int) $values->is_preview == 1) {
+		if ((int)$values->is_preview == 1) {
 			$this->storeDataIntoSession($values);
 			exit;
 		}
 
 		unset($values->is_preview);
 
-		if($values->type == "edit") {
+		if ($values->type == "edit") {
 
 			// Unset redudant fields
 			$id = $values->id;
@@ -351,9 +344,9 @@ final class PostPresenter extends SecuredPresenter
 			unset($values->type);
 
 			// Store file
-			if($values->file->isOk()) {
+			if ($values->file->isOk()) {
 
-				if($values->file->isImage()) {
+				if ($values->file->isImage()) {
 					$fileType = "image";
 				} else {
 					$fileType = "file";
@@ -370,7 +363,7 @@ final class PostPresenter extends SecuredPresenter
 
 			$result = $this->context->getService("postRepository")->updateByIdAndLang((array)$values, $id, $lang);
 
-			if($result) {
+			if ($result) {
 				$this->flashMessage('Položka byla úspěšně upravena.');
 			} else {
 				$this->flashMessage('Položku se nepodařilo upravit, nebo nedošlo k žádné změně.');
@@ -399,15 +392,15 @@ final class PostPresenter extends SecuredPresenter
 			}
 
 			// Store file
-			if($values->file->isOk()) {
+			if ($values->file->isOk()) {
 
-				if($values->file->isImage()) {
+				if ($values->file->isImage()) {
 					$fileType = "image";
 				} else {
 					$fileType = "file";
 				}
 
-				if($fileType == "image") {
+				if ($fileType == "image") {
 					$file_id = $this->context->getService("fileRepository")->storeImage($values->file, $fileType, true);
 				} else {
 					$file_id = $this->context->getService("fileRepository")->storeFile($values->file, $fileType);
@@ -418,14 +411,8 @@ final class PostPresenter extends SecuredPresenter
 			unset($values->file);
 
 
-			$languages = array(
-				"cs_CZ",
-				"en_US",
-                "sk_SK",
-                "es_ES"
-			);
-
-			if(($key = array_search($values->lang, $languages)) !== false) {
+			$languages = $this->enabledLanguages;
+			if (($key = array_search($values->lang, $languages)) !== false) {
 				unset($languages[$key]);
 			}
 
@@ -433,14 +420,14 @@ final class PostPresenter extends SecuredPresenter
 			$result = $this->context->getService("postRepository")->insert((array)$values);
 			$lastRow = $this->context->getService("postRepository")->find()->order("id DESC")->fetch();
 
-			foreach($languages as $_lang) {
+			foreach ($languages as $_lang) {
 				$valuesTemporary = $values;
 				$valuesTemporary->id = $lastRow->id;
 				$valuesTemporary->lang = $_lang;
 				$this->context->getService("postRepository")->insert((array)$valuesTemporary);
 			}
 
-			if($result) {
+			if ($result) {
 				$this->flashMessage('Položka byla úspěšně přidána.');
 				$this->redirect("Post:edit", $lastRow->id, $lang);
 			} else {
@@ -452,13 +439,14 @@ final class PostPresenter extends SecuredPresenter
 		}
 	}
 
-	public function processAttachmentForm(AttachmentForm $form) {
+	public function processAttachmentForm(AttachmentForm $form)
+	{
 		$values = $form->getValues();
 
 		// Store file
-		if($values->file->isOk()) {
+		if ($values->file->isOk()) {
 
-			if($values->file->isImage()) {
+			if ($values->file->isImage()) {
 				$fileType = "image";
 			} else {
 				$fileType = "file";
@@ -470,10 +458,10 @@ final class PostPresenter extends SecuredPresenter
 		unset($values->file);
 
 		// Store file 2
-		if($values->file2->isOk()) {
+		if ($values->file2->isOk()) {
 
 			$fileType = "file";
-			if($values->file2->isImage()) {
+			if ($values->file2->isImage()) {
 				$fileType = "image";
 			}
 
@@ -483,10 +471,10 @@ final class PostPresenter extends SecuredPresenter
 		unset($values->file2);
 
 		// Store file 3
-		if($values->file3->isOk()) {
+		if ($values->file3->isOk()) {
 
 			$fileType = "file";
-			if($values->file3->isImage()) {
+			if ($values->file3->isImage()) {
 				$fileType = "image";
 			}
 
@@ -495,7 +483,7 @@ final class PostPresenter extends SecuredPresenter
 		}
 		unset($values->file3);
 
-		if($values->operation_type == "edit") {
+		if ($values->operation_type == "edit") {
 
 			// Unset redudant fields
 			$id = $values->id;
@@ -505,7 +493,7 @@ final class PostPresenter extends SecuredPresenter
 			// Do query
 			$result = $this->context->getService("postAttachmentRepository")->update((array)$values, $id);
 
-			if($result) {
+			if ($result) {
 				$this->flashMessage('Položka byla úspěšně upravena.');
 			} else {
 				$this->flashMessage('Položku se nepodařilo upravit, nebo nedošlo k žádné změně.');
@@ -523,7 +511,7 @@ final class PostPresenter extends SecuredPresenter
 
 			$result = $this->context->getService("postAttachmentRepository")->insert((array)$values);
 
-			if($result) {
+			if ($result) {
 				$this->flashMessage('Položka byla úspěšně přidána.');
 			} else {
 				$this->flashMessage('Položku se nepodařilo přidat.');

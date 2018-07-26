@@ -2,12 +2,12 @@
 
 namespace ContrastCms\Application\AdminModule;
 
-use Contrast\FileRepository;
+use ContrastCms\Application\FileRepository;
 use Nette\Application\Responses\JsonResponse;
 use Nette\Http\FileUpload;
 use Nette\Image;
 
-final class FilePresenter extends SecuredPresenter
+class FilePresenter extends SecuredPresenter
 {
 
     public function actionImagesJson() {
@@ -36,12 +36,6 @@ final class FilePresenter extends SecuredPresenter
 
             // Store image
             $file = $this->context->getService("fileRepository")->storeFile($fileUpload, "image");
-
-            /*
-            $image = Image::fromFile(FileRepository::PATH . $file->filename);
-            $image->resize(592, null, Image::FIT);
-            $image->save(FileRepository::PATH . "592_" . $file->filename);
-            */
 
             // displaying file
             $array = array(

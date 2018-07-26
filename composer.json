@@ -15,6 +15,7 @@
     "nette/security": "^2.4",
     "nette/database": "^2.4",
     "nette/http": "^2.4",
+    "nette/mail": "^2.4",
     "contrastcms/visualpaginator": ">=1.1.2"
   }
 }

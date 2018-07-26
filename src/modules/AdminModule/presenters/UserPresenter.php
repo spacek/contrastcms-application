@@ -2,125 +2,129 @@
 
 namespace ContrastCms\Application\AdminModule;
 
-use Contrast\Authenticator;
+use ContrastCms\VisualPaginator\VisualPaginator;
+use Nette\Application\BadRequestException;
+use Nette\Security\Passwords;
 
-final class UserPresenter extends SecuredPresenter
+class UserPresenter extends SecuredPresenter
 {
-    public function actionDefault() {
+	public function actionDefault()
+	{
 
-        $session = $this->context->getService("session");
-        $filter = $session->getSection("filter-user");
-        if(!$filter->limit) {
-            $filter->limit = 10;
-        }
-        $this->template->limit = $filter->limit;
+		$session = $this->context->getService("session");
+		$filter = $session->getSection("filter-user");
+		if (!$filter->limit) {
+			$filter->limit = 10;
+		}
+		$this->template->limit = $filter->limit;
 
-        $vp = new \VisualPaginator($this, 'vp');
-        $vp->loadState($this->request->getParameters());
-        $paginator = $vp->getPaginator();
-        $paginator->itemsPerPage = $filter->limit;
-        $paginator->itemCount = $this->context->getService("userRepository")->count();
+		$vp = new VisualPaginator();
+		$vp->loadState($this->request->getParameters());
+		$paginator = $vp->getPaginator();
+		$paginator->itemsPerPage = $filter->limit;
+		$paginator->itemCount = $this->context->getService("userRepository")->count();
 
-        $this->template->results = $this->context->getService("userRepository")->fetch($paginator->offset, $paginator->itemsPerPage);
-    }
+		$this->template->results = $this->context->getService("userRepository")->fetch($paginator->offset, $paginator->itemsPerPage);
 
-    public function actionEditUser($id) {
-        $this["userForm"]["type"]->setValue("edit");
-        $this["userForm"]["id"]->setValue($id);
+		$this->addComponent($vp, "vp");
+	}
 
-        // Load other data
+	public function actionEditUser($id)
+	{
+		$this["userForm"]["type"]->setValue("edit");
+		$this["userForm"]["id"]->setValue($id);
 
-        $item = $this->context->getService("userRepository")->findById($id);
-        $record = $item->fetch();
+		// Load other data
 
-        if (!$record) {
-            throw new BadRequestException;
-        }
+		$item = $this->context->getService("userRepository")->findById($id);
+		$record = $item->fetch();
 
-        // Populate
+		if (!$record) {
+			throw new BadRequestException("404");
+		}
 
-        $this['userForm']->setDefaults($record);
-        $this["userForm"]->setDefaults(array("password" => ""));
-    }
+		// Populate
 
-    public function actionAddUser($id) {
-        $this["userForm"]["type"]->setValue("insert");
-        $this["userForm"]["id"]->setValue($id);
-    }
+		$this['userForm']->setDefaults($record);
+		$this["userForm"]->setDefaults(array("password" => ""));
+	}
 
-    // Form
+	public function actionAddUser($id)
+	{
+		$this["userForm"]["type"]->setValue("insert");
+		$this["userForm"]["id"]->setValue($id);
+	}
 
-    protected function createComponentUserForm()
-    {
-        $form = new UserForm();
-        $form->onSuccess[] = [$this, "processUserForm"];
-        return $form;
-    }
+	// Form
 
-    public function processUserForm(UserForm $form)
-    {
-        $values = $form->getValues();
+	protected function createComponentUserForm()
+	{
+		$form = new UserForm();
+		$form->onSuccess[] = [$this, "processUserForm"];
+		return $form;
+	}
 
-        if($values->type == "edit") {
+	public function processUserForm(UserForm $form)
+	{
+		$values = $form->getValues();
 
-            // Unset redudant fields
-            $id = $values->id;
-            unset($values->id);
-            unset($values->type);
+		if ($values->type == "edit") {
 
-            if(trim($values->password) != "") {
-                $values->password = Authenticator::calculateHash($values->password);
-            } else {
-                unset($values->password);
-            }
+			// Unset redudant fields
+			$id = $values->id;
+			unset($values->id);
+			unset($values->type);
 
-            // Do query
-            $result = $this->context->getService("userRepository")->update((array)$values, $id);
+			if (trim($values->password) != "") {
+				$values->password = Passwords::hash($values->password);
+			} else {
+				unset($values->password);
+			}
 
-            if($result) {
-                $this->flashMessage('Položka byla úspěšně upravena.');
-            } else {
-                $this->flashMessage('Položku se nepodařilo upravit, nebo nedošlo k žádné změně.');
-            }
+			// Do query
+			$result = $this->context->getService("userRepository")->update((array)$values, $id);
 
-            $this->redirect("User:editUser", $id);
+			if ($result) {
+				$this->flashMessage('Položka byla úspěšně upravena.');
+			} else {
+				$this->flashMessage('Položku se nepodařilo upravit, nebo nedošlo k žádné změně.');
+			}
 
-        } else {
-            // Unset redudant fields
-            unset($values->id);
-            unset($values->type);
+			$this->redirect("User:editUser", $id);
 
-            // Extend store array
-            $values->created_at = date("Y-m-d H:i:s");
+		} else {
+			// Unset redudant fields
+			unset($values->id);
+			unset($values->type);
 
-            if(trim($values->password) != "") {
-                $values->password = Authenticator::calculateHash($values->password);
-            } else {
-                unset($values->password);
-            }
+			// Extend store array
+			$values->created_at = date("Y-m-d H:i:s");
 
-            // Do query
-            $result = $this->context->getService("userRepository")->insert((array)$values);
+			if (trim($values->password) != "") {
+				$values->password = Passwords::hash($values->password);
+			} else {
+				unset($values->password);
+			}
 
-            if($result) {
-                $this->flashMessage('Položka byla úspěšně přidána.');
-                $this->redirect("User:editUser", $result);
-            } else {
-                $this->flashMessage('Položku se nepodařilo přidat.');
-                $this->redirect("User:default");
-            }
+			// Do query
+			$result = $this->context->getService("userRepository")->insert((array)$values);
 
-        }
-    }
+			if ($result) {
+				$this->flashMessage('Položka byla úspěšně přidána.');
+				$this->redirect("User:editUser", $result);
+			} else {
+				$this->flashMessage('Položku se nepodařilo přidat.');
+				$this->redirect("User:default");
+			}
 
-    public function actionDeleteUser($id) {
+		}
+	}
 
-        // todo check permission
-
-        $postRepository = $this->context->getService("userRepository");
-        $postRepository->deleteById($id); // todo: do recursive delete
-
-        $this->redirectUrl($_SERVER['HTTP_REFERER']);
-        exit;
-    }
+	public function actionDeleteUser($id)
+	{
+		$postRepository = $this->context->getService("userRepository");
+		$postRepository->deleteById($id);
+		$this->redirectUrl($_SERVER['HTTP_REFERER']);
+		exit;
+	}
 }
