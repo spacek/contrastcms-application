@@ -2,8 +2,11 @@
 
 namespace App;
 
+use Nette\Application\BadRequestException;
 use Nette\Application\Request;
 use Nette\Application\Routers\Route;
+use Nette\Http\IRequest;
+use Nette\Http\Url;
 
 class FilterRoute extends Route
 {
@@ -16,10 +19,10 @@ class FilterRoute extends Route
     private $filters = array();
 
     /**
-     * @param Nette\Web\IHttpRequest $httpRequest
-     * @return Nette\Application\Request|NULL
+     * @param IRequest $httpRequest
+     * @return Request
      */
-    public function match(Nette\Http\IRequest $httpRequest)
+    public function match(IRequest $httpRequest)
     {
         $appRequest = parent::match($httpRequest);
         if (!$appRequest) {
@@ -34,11 +37,11 @@ class FilterRoute extends Route
     }
 
     /**
-     * @param Nette\Application\Request $appRequest
-     * @param Nette\Web\Uri $refUri
+     * @param Request $appRequest
+     * @param Url $refUri
      * @return string
      */
-    public function constructUrl(Request $appRequest, Nette\Http\Url $refUrl)
+    public function constructUrl(Request $appRequest, Url $refUrl)
     {
         if ($params = $this->doFilterParams($this->getRequestParams($appRequest), $appRequest, self::WAY_OUT)) {
             $appRequest = $this->setRequestParams($appRequest, $params);
@@ -73,7 +76,7 @@ class FilterRoute extends Route
     }
 
     /**
-     * @param Nette\Application\Request $appRequest
+     * @param Request $appRequest
      * @return array
      */
     private function getRequestParams(Request $appRequest)
@@ -104,20 +107,20 @@ class FilterRoute extends Route
     }
 
     /**
-     * @param Nette\Application\Request $appRequest
+     * @param Request $appRequest
      * @param array $params
-     * @return Nette\Application\Request
+     * @return Request
      */
     private function setRequestParams(Request $appRequest, array $params)
     {
         $metadata = $this->getDefaults();
 
         if (!isset($params[self::PRESENTER_KEY])) {
-            throw new \InvalidStateException('Missing presenter in route definition.');
+            throw new BadRequestException('Missing presenter in route definition.');
         }
         if (isset($metadata[self::MODULE_KEY])) {
             if (!isset($params[self::MODULE_KEY])) {
-                throw new \InvalidStateException('Missing module in route definition.');
+                throw new BadRequestException('Missing module in route definition.');
             }
             $presenter = $params[self::MODULE_KEY] . ':' . $params[self::PRESENTER_KEY];
             unset($params[self::MODULE_KEY], $params[self::PRESENTER_KEY]);
@@ -134,7 +137,7 @@ class FilterRoute extends Route
 
     /**
      * @param array $params
-     * @param Nette\Application\Request $request
+     * @param Request $request
      * @param string $way
      */
     private function doFilterParams($params, Request $request, $way)
