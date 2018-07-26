@@ -4,6 +4,11 @@ namespace ContrastCms\Application\AdminModule;
 
 class SettingPresenter extends SecuredPresenter
 {
+
+	public function actionDefault() {
+		$this->template->setFile(__DIR__ . "/../templates/Setting/default.latte");
+	}
+
 	protected function createComponentSettingForm()
 	{
 		$form = new SettingForm();

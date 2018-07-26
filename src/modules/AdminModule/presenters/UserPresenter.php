@@ -27,9 +27,11 @@ class UserPresenter extends SecuredPresenter
 		$this->template->results = $this->context->getService("userRepository")->fetch($paginator->offset, $paginator->itemsPerPage);
 
 		$this->addComponent($vp, "vp");
+
+		$this->template->setFile(__DIR__ . "/../templates/User/default.latte");
 	}
 
-	public function actionEditUser($id)
+	public function actionEdit($id)
 	{
 		$this["userForm"]["type"]->setValue("edit");
 		$this["userForm"]["id"]->setValue($id);
@@ -47,12 +49,16 @@ class UserPresenter extends SecuredPresenter
 
 		$this['userForm']->setDefaults($record);
 		$this["userForm"]->setDefaults(array("password" => ""));
+
+		$this->template->setFile(__DIR__ . "/../templates/User/edit.latte");
 	}
 
 	public function actionAddUser($id)
 	{
 		$this["userForm"]["type"]->setValue("insert");
 		$this["userForm"]["id"]->setValue($id);
+
+		$this->template->setFile(__DIR__ . "/../templates/User/add.latte");
 	}
 
 	// Form

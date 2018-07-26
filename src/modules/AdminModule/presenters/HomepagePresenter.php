@@ -5,6 +5,11 @@ namespace ContrastCms\Application\AdminModule;
 class HomepagePresenter extends SecuredPresenter
 {
 
+	public function actionDefault()
+	{
+		$this->template->setFile(__DIR__ . "/../templates/Homepage/default.latte");
+	}
+
 	public function actionLogout()
 	{
 
