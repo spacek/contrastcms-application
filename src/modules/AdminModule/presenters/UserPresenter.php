@@ -126,7 +126,7 @@ class UserPresenter extends SecuredPresenter
 		}
 	}
 
-	public function actionDeleteUser($id)
+	public function actionDelete($id)
 	{
 		$postRepository = $this->context->getService("userRepository");
 		$postRepository->deleteById($id);
