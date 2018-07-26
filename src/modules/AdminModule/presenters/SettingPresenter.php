@@ -2,7 +2,7 @@
 
 namespace ContrastCms\Application\AdminModule;
 
-final class SettingPresenter extends SecuredPresenter
+class SettingPresenter extends SecuredPresenter
 {
 	protected function createComponentSettingForm()
 	{
