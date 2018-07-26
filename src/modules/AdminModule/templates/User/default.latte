@@ -1,0 +1,38 @@
+{block #content}
+    <div class="detail">
+        <h2>Uživatelé</h2>
+        {include "top.latte"}
+
+        <hr />
+        {if $results && count($results)}
+            <table class="list border" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th class="first">Přihlašovací jméno</th>
+                        <th>Jméno a příjmení</th>
+                        <th>Email</th>
+                        <th colspan="2" class="last">Akce</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr class="divider"></tr>
+                <tr n:foreach="$results as $result" class="{if $iterator->odd}odd{else}even{/if}">
+                    <td>{$result->username}</td>
+                    <td>{$result->name} {$result->surname}</td>
+                    <td>{$result->email}</td>
+                    <td><a n:href="User:editUser $result->id">Upravit</a></td>
+                    <td><a class="dangerous-link" data-warning="Smazáním této položky smažete i položky zařazené pod ní." n:href="User:deleteUser $result->id">Odebrat</a></td>
+                </tr>
+                </tbody>
+            </table>
+
+            {control vp}
+        {else}
+            <p>Není založený žádný uživatelský účet.</p>
+        {/if}
+
+    </div>
+
+
+    </div>
+{/block}

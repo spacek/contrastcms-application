@@ -1,0 +1,25 @@
+{block #content}
+    <div class="detail">
+        <h2>Galerie</h2>
+        {include "top.latte"}
+
+        <hr />
+        <div class="gallery">
+        {if $results && count($results)}
+            {foreach $results as $result}
+                <a href="{plink Gallery:detail $result->id}" class="gallery-item">
+                    <h3>{$result->name} (ID: {$result->id})</h3>
+                    {var $firstImage = $photosRepository->getFirstImage($result->id)}
+                    <div n:if="$firstImage" class="image"><img src="{$basePath}/data/{$files->getFileNameResized($firstImage->file_id, 150)}" alt=""/></div>
+                </a>
+            {/foreach}
+            {control vp}
+        {else}
+            <div class="clear">
+            <p>Není založena žádná galerie.</p>
+            </div>
+        {/if}
+        </div>
+
+    </div>
+{/block}

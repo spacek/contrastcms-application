@@ -1,0 +1,38 @@
+{block #content}
+	<div class="detail">
+		<h2>Nastavení</h2>
+
+		<div class="top languages">
+			<p style="margin-top: 0;">Upravujete jazyk</p>
+            {foreach $enabledLanguages as $_lang => $name}
+				<a {if $language == $_lang}class="active"{/if} n:href="this, lang => $_lang">{$name}</a>
+            {/foreach}
+		</div>
+
+		{form settingForm}
+		<div id="settings-accordion">
+			<h3>SEO atp.</h3>
+			<div>
+				{label site_name /}
+				{input site_name}
+
+				{label default_keywords /}
+				{input default_keywords}
+
+				{label default_description /}
+				{input default_description}
+
+			</div>
+
+			<h3>Systém</h3>
+			<div>
+				{label version /}
+				{input version}
+			</div>
+		</div>
+			<p>{input save}</p>
+		{/form}
+	</div>
+
+
+{/block}

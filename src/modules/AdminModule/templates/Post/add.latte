@@ -1,0 +1,14 @@
+{block #content}
+	<div class="detail">
+		<h2>Nový dokument</h2>
+        <script type="text/javascript">
+            $(document).ready(
+                    function() {
+                        $("#left-tree-item-{$id}").addClass("active");
+                    }
+            );
+        </script>
+		{include 'top.latte'}
+		{include 'form.latte'}
+	</div>
+{/block}

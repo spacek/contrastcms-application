@@ -1,0 +1,16 @@
+
+{block #content}
+	<div class="detail">
+		<h2>Detail fotografie</h2>
+		{include 'top.latte'}
+		<div class="content">
+		<br />
+		<br />
+		<img src="{$basePath}/data/{$files->getFileNameResized($result->file_id, 400)}" alt=""/>
+		<br />
+		<br />
+		<a n:href="Gallery:deletePhoto $result->id">Smazat foto</a>
+		<a n:href="Gallery:editPhoto $result->id">Přejmenovat foto / otagovat foto</a>
+		</div>
+	</div>
+{/block}

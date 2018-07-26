@@ -1,0 +1,116 @@
+{form postForm}
+
+    <!-- Jednoduché vykreslení chyb -->
+    <ul class="errors" n:if="$form->hasErrors()">
+        <li n:foreach="$form->errors as $key => $error">{$key} {$error}</li>
+    </ul>
+    <fieldset id="frmFieldset">
+
+        <div class="form_top">
+            {label keywords /}
+            {input keywords}
+
+            {label description /}
+            {input description}
+
+            <div class="options">
+
+                <label class="label_radio" for="public">Článek je veřejný</label>
+
+                <div class="radio" id="public">
+                    <span class="on">Ano</span>
+                    <span class="off">Ne</span>
+                    {input is_public}
+                </div>
+
+                <span id="label_date">{label created_at /}
+                    {input created_at, id => "datetimepicker"}
+                </span>
+
+                {input in_menu}
+
+                {label in_bottom_menu /}
+                {input in_bottom_menu}
+
+                {label title /}
+                {input title}
+
+            </div>
+
+
+        </div>
+
+        <div class="form_center">
+
+            {label file /}
+
+            {if isset($image)}
+                <div class="row">
+                    <label>Současný nahraný obrázek:<br /></label>
+                    <img src="{$basePath}/data/{$files->getFileNameResized($image, 200)}" alt="" />
+                    <p>&nbsp;</p>
+                    <label for="">Nahrát nový:</label>
+                </div>
+            {/if}
+
+            {input file}
+
+            {label perex /}
+            <div class="editor_box">
+                {input perex}
+            </div>
+
+            {label content /}
+            <div class="editor_box">
+                {input content}
+            </div>
+
+        </div>
+
+        <div id="form_bottom" class="form_bottom">
+            <p id="change_info" style="display: none;">Vámi vytvořené změny v dokumentu nejsou zatím uloženy!</p>
+            {input preview}
+            {input save}
+        </div>
+
+    </fieldset>
+{/form}
+
+<script>
+    function displayChanged() {
+        $("#change_info").show();
+    }
+
+    function displayPreview() {
+        $("#frmpostForm-is_preview").val("1");
+        $("form").prop("target", "preview").submit();
+        return false;
+    }
+
+    function ulozit() {
+        $("#frmpostForm-is_preview").val("0");
+        $("form").prop("target", "_self").submit();
+        return false;
+    }
+
+    function ckload() {
+        CKEDITOR.instances["frmpostForm-content"].on('change', function (e) {
+            displayChanged();
+        });
+    }
+
+    var tid = null;
+    $(document).ready(
+            function () {
+
+                $("#frmFieldset").append("<div id='old_content_value' style='display: none;'>" + $("#frmpostForm-content").val() + "</div>")
+                $("form *").change(function () {
+                    displayChanged();
+                });
+
+                setTimeout("ckload()", 1500);
+                setTimeout("ckload()", 3000);
+                setTimeout("ckload()", 4500);
+            }
+    );
+</script>

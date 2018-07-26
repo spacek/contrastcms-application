@@ -1,0 +1,8 @@
+<div n:if="$modules" class="content_top">
+    <a n:foreach="$modules as $module" 
+        {var $controller = str_replace("default", "*", $module->presenter)} 
+            href="{plink $module->presenter}" 
+            {ifCurrent $controller}class="active"{/ifCurrent}>
+                {$module->name}
+    </a>
+</div>

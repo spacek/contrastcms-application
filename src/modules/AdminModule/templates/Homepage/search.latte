@@ -1,0 +1,58 @@
+{block #content}
+    <div class="detail">
+
+        <h2>Výsledky vyhledávání ve stránákách</h2>
+        {if $results && count($results)}
+            <table class="list border" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>Poslední změna dokumentu</th>
+                    <th>Název dokumentu</th>
+                    <th colspan="3">Akce</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="divider"></tr>
+                <tr n:foreach="$results as $result" class="{if $iterator->even}even{else}odd{/if}">
+                    <td>{date("j. n. Y", strtotime($result->updated_at))}</td>
+                    <td>{$result->title}</td>
+                    <td><a n:if="$user->identity->group_id <= 3" n:href="Post:add $result->id">Vytvořit pod-dokument</a></td>
+                    <td><a n:href="Post:edit $result->id">Upravit</a></td>
+                    <td><a n:if="$user->identity->group_id <= 3" class="dangerous-link" data-warning="Smazáním této položky smažete i položky zařazené pod ní." n:href="Post:delete $result->id">Odebrat</a></td>
+                </tr>
+                </tbody>
+            </table>
+        {else}
+            <p>Žádné výsledky pro hledaný výraz.</p>
+        {/if}
+
+        <h2>Výsledky vyhledávání v produktech</h2>
+        {if $results2 && count($results2)}
+            <table class="list border" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Kód</th>
+                    <th>Název</th>
+                    <th colspan="5">Akce</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="divider"></tr>
+                <tr n:foreach="$results2 as $result" class="{if $iterator->even}even{else}odd{/if}">
+                    <td>{$result->id}</td>
+                    <td>{$result->code}</td>
+                    <td>{$result->name}</td>
+                    <td><a n:href="Eshop:variants $result->id">Varianty produktu</a></td>
+                    <td><a n:href="Eshop:editProduct $result->id">Upravit</a></td>
+                    <td><a n:href="Eshop:gallery $result->id">Galerie</a></td>
+                    <td><a n:href="Eshop:productPrices $result->id">Nastavit ceny</a> {if $result->type == 1} | <a n:href="Eshop:childrenProducts $result->id">Nastavit produkty v balíčku</a>{/if}</td>
+                    <td><a class="dangerous-link" data-warning="Smazáním této položky smažete i položky zařazené pod ní." n:href="Eshop:deleteProduct $result->id">Odebrat</a></td>
+                </tr>
+                </tbody>
+            </table>
+        {else}
+            <p>Žádné výsledky pro hledaný výraz.</p>
+        {/if}
+    </div>
+{/block}

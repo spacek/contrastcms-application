@@ -1,0 +1,16 @@
+{if $fileValue}
+    {var $file = $files->findById($fileValue)->fetch()}
+    {if $file}
+        <div class="uploaded-file">
+            {if $file->type == "image"}
+                <h3>Nahraný obrázek</h3>
+                <p><img src="{$basePath}/data/{$files->getFileNameResized($file->id, 150)}" alt="Image"/></p>
+            {else}
+                <p>{$file->filename}</p>
+            {/if}
+        </div>
+        {if $module == "post"}
+        <a class="remove" n:href="Post:deleteFile $file->id, $field, $parent">Odebrat soubor</a>
+        {/if}
+    {/if}
+{/if}

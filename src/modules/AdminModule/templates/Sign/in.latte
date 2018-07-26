@@ -1,0 +1,24 @@
+{layout "../@layout.latte"}
+{block #content}
+	<div class="box">
+		<a href="#"></a>
+		<img src="{$basePath}/backend/css/images/logo.png" alt="" />
+
+		{form signInForm}
+			<fieldset>
+				{input username}
+				{input password}
+				<button type="submit">login</button>
+			</fieldset>
+		{/form}
+	</div>
+	<div id="flashes_login">
+		<ul class="errors" n:if="$form->hasErrors()">
+			<li n:foreach="$form->errors as $error">{$error}</li>
+		</ul>
+	</div>
+	<p>&nbsp;</p>
+	<p>
+		<a style="font-size: smaller;" n:href="Sign:forgottenPassword">I forgot my password</a>
+	</p>
+{/block}

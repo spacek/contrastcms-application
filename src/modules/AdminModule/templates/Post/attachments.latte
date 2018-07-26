@@ -1,0 +1,54 @@
+{block #content}
+	<div class="detail">
+		<h2>Komponenty</h2>
+		{include 'top.latte'}
+		<div class="sub-buttons">
+			<a class="add-attachment" n:href="Post:addAttachment $id, $lang">Přiložit komponentu</a>
+		</div>
+
+
+		<hr />
+		{if $results && count($results)}
+			<table id="tablednd" data-id="{$id}" class="list" data-url="{plink Post:reorderAttachments}">
+				<thead>
+				<tr>
+					<th class="first"><a href="#" class="order">Priorita</a></th>
+					<th class="first"><a href="#" class="order">Typ</a></th>
+					<th>Poznámka / Systémové označení</th>
+					<th>Obrázek (je-li nahraný)</th>
+					<th><a href="#" class="order">Titulek / název</a></th>
+					<th colspan="4" class="last"><a href="#" class="order">Akce</a></th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr class="divider"></tr>
+				<tr n:foreach="$results as $result" id="{$result->id}" class="{if $iterator->odd}odd{else}even{/if}">
+					<td>
+						{$result->priority}
+					</td>
+					<td>
+						{$attachmentTypes[$result->type]}
+					</td>
+					<td>{$result->name}</td>
+					<td>
+						{if $result->type == "image" && $result->file_id != null}
+							<img src="{$basePath}/data/{$files->getFilename($result->file_id)}" width="150" alt=""/>
+						{else}
+							-
+						{/if}
+					</td>
+
+					<td>
+						<a n:href="Post:editAttachment $result->id">Upravit</a>
+					</td>
+					<td><a class="dangerous-link" data-warning="Smazáním této položky smažete i položky zařazené pod ní." n:href="Post:deleteAttachment $result->id">Odebrat</a></td>
+				</tr>
+				</tbody>
+			</table>
+
+			{control vp}
+		{else}
+			<p>Není přiložena žádná příloha</p>
+		{/if}
+	</div>
+{/block}

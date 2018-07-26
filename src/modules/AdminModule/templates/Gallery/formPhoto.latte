@@ -1,0 +1,27 @@
+{form photoForm}
+	<fieldset>
+
+		<div class="form_center">
+
+			{label name /}
+			{input name}
+
+			{label is_public /}
+			{input is_public}
+
+            <div class="drop-zone">
+
+                <DIV id="status">Přetáhněte do boxu níže fotografii co si přejte nahrát.<br /><br /></DIV>
+                <DIV id="drop">Sem přetáněte fotografie ve formátu JPG.</DIV>
+                <DIV id="list"></DIV>
+
+            </div>
+
+		</div>
+
+		<div class="form_bottom">
+			{input save, id => "frm-photoForm-save"}
+		</div>
+
+	</fieldset>
+{/form}

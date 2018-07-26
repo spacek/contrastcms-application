@@ -1,0 +1,11 @@
+<div class="top links">
+	<a {ifCurrent Gallery:default}class="active" {/ifCurrent} n:href="Gallery:default">Galerie</a>
+	<a n:if="$user->getIdentity()->group_id <= 3" {ifCurrent Gallery:add}class="active" {/ifCurrent}n:href="Gallery:add">Přidat galerii</a>
+</div>
+
+<div class="top languages">
+	<p style="margin-top: 0;">Upravujete jazyk</p>
+    {foreach $enabledLanguages as $_lang => $name}
+		<a {if $language == $_lang}class="active"{/if} n:href="this, lang => $_lang">{$name}</a>
+    {/foreach}
+</div>

@@ -1,0 +1,39 @@
+{block #content}
+    <div class="detail">
+        <h2>Detail galerie: {$gallery->name}</h2>
+        {include "top.latte"}
+
+        <div class="top links">
+            <a n:if="$user->getIdentity()->group_id <= 3" {ifCurrent Gallery:upload}class="active" {/ifCurrent}n:href="Gallery:upload $gallery->id">Přidat fotografii</a>
+            <a n:if="$user->getIdentity()->group_id <= 3" class="dangerous-link" data-warning="Smazáním této položky smažete i položky zařazené pod ní." n:href="Gallery:deleteGallery $gallery->id">Smazat galerii</a>
+            <a n:if="$user->getIdentity()->group_id <= 3" n:href="Gallery:edit $gallery->id">Přejmenovat galerii</a>
+        </div>
+
+        <hr />
+
+        {if $results && count($results)}
+        <table id="tablednd" data-id="0" class="list" data-url="{plink reorderItems}">
+            <thead>
+            <tr>
+                <th>Obrázek</th>
+                <th>Titulek</th>
+                <th colspan="2">Akce</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="divider"></tr>
+            <tr n:foreach="$results as $result" id="{$result->id}" class="{if $iterator->odd}odd{else}even{/if}">
+                <td><a n:href="Gallery:photoDetail $result->id"><img src="{$basePath}/data/{$files->getFileNameResized($result->file_id, 140)}" alt="" /></a></td>
+                <td>{$result->name}</td>
+                <td><a n:href="editPhoto $result->id">Upravit</a></td>
+                <td><a class="dangerous-link" data-warning="Opravdu si přejte smazat tuto položku?" n:href="deletePhoto $result->id">Odebrat</a></td>
+            </tr>
+            </tbody>
+        </table>
+        {else}
+        <div class="clear">
+            <p>Není založena žádná fotografie.</p>
+        </div>
+        {/if}
+    </div>
+{/block}

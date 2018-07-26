@@ -1,0 +1,27 @@
+{block #content}
+	<div class="detail">
+
+		<h2>Schvalování změn</h2>
+		{if $results && count($results)}
+            <table class="list border" cellspacing="0">
+			<thead>
+                <tr>
+                    <th>Název dokumentu</th>
+                    <th>Akce</th>
+                </tr>
+			</thead>
+                <tbody>
+                <tr class="divider"></tr>
+				<tr n:foreach="$results as $result" class="{if $iterator->even}even{else}odd{/if}">
+					<td>{$result->title}</td>
+					<td><a n:href="Post:editDraft $result->id">Zobrazit a upravit / schválit</a></td>
+				</tr>
+			</tbody>
+		</table>
+		{else}
+            <div class="no-results">
+		        <p>Aktuálně není nic ke schválení</p>
+            </div>
+		{/if}
+	</div>
+{/block}

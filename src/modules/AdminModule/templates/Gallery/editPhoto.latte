@@ -1,0 +1,27 @@
+
+{block #content}
+	<div class="detail">
+		<h2>Upravit fotografii</h2>
+		{include 'top.latte'}
+		{form photoForm}
+        	<fieldset>
+
+        		<div class="form_center">
+
+        			{label name /}
+        			{input name}
+
+                    {label url /}
+                    {input url}
+
+        			{label is_public /}
+        			{input is_public}
+
+        		<div class="form_bottom">
+        			{input save}
+        		</div>
+
+        	</fieldset>
+        {/form}
+	</div>
+{/block}
