@@ -3,7 +3,6 @@
 namespace ContrastCms\Application;
 
 use Nette\Database\Table\Selection;
-use Nette\Http\Context;
 use Nette\SmartObject;
 
 abstract class Repository
@@ -13,7 +12,7 @@ abstract class Repository
 	/** @var \Nette\Database\Context */
 	protected $connection;
 
-	public function __construct(Context $db)
+	public function __construct(\Nette\Database\Context $db)
 	{
 		$this->connection = $db;
 	}
