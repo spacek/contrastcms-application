@@ -1,8 +1,9 @@
-<div n:if="$modules" class="content_top">
-    <a n:foreach="$modules as $module" 
-        {var $controller = str_replace("default", "*", $module->presenter)} 
-            href="{plink $module->presenter}" 
-            {ifCurrent $controller}class="active"{/ifCurrent}>
-                {$module->name}
+<li n:foreach="$modules as $module" class="nav-item {ifCurrent $controller} active{/ifCurrent}">
+    {var $controller = str_replace("default", "*", $module->presenter)}
+    <a class="mrg-top-30" href="{plink $module->presenter}">
+                                <span class="icon-holder">
+										<i class="{$module->icon}"></i>
+									</span>
+        <span class="title">{$module->name}</span>
     </a>
-</div>
+</li>
