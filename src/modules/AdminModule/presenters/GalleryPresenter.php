@@ -2,7 +2,6 @@
 
 namespace ContrastCms\Application\AdminModule;
 
-use Contrast\Authenticator;
 use ContrastCms\VisualPaginator\VisualPaginator;
 use Nette\Application\BadRequestException;
 
@@ -18,7 +17,7 @@ final class GalleryPresenter extends SecuredPresenter
 
         $this->template->limit = $filter->limit;
 
-        $vp = new \VisualPaginator($this, 'vp');
+        $vp = new VisualPaginator($this, 'vp');
         $vp->loadState($this->request->getParameters());
         $paginator = $vp->getPaginator();
         $paginator->itemsPerPage = $filter->limit;

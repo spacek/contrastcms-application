@@ -4,7 +4,6 @@ namespace ContrastCms\Application;
 
 class MenuProvider
 {
-
 	use \Nette\SmartObject;
 
 	public static function getMenuObject($postRepository, $activeId = 0, $language = "cs_CZ")
