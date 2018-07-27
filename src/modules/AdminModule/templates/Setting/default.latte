@@ -1,38 +1,87 @@
 {block #content}
-	<div class="detail">
-		<h2>Nastavení</h2>
-
-		<div class="top languages">
-			<p style="margin-top: 0;">Upravujete jazyk</p>
-            {foreach $enabledLanguages as $_lang => $name}
-				<a {if $language == $_lang}class="active"{/if} n:href="this, lang => $_lang">{$name}</a>
-            {/foreach}
+	<div class="row">
+		<div class="col-md-2 offset-md-10">
+			<p style="margin-top: 0;">Upravujete jazyk:</p>
+			<ul class="nav nav-tabs" role="tablist">
+				<li class="nav-item">
+					{foreach $enabledLanguages as $_lang => $name}
+						<a class="nav-link {if $language == $_lang} active{/if}" n:href="this, lang => $_lang">{$name}</a>
+					{/foreach}
+				</li>
+			</ul>
 		</div>
-
-		{form settingForm}
-		<div id="settings-accordion">
-			<h3>SEO atp.</h3>
-			<div>
-				{label site_name /}
-				{input site_name}
-
-				{label default_keywords /}
-				{input default_keywords}
-
-				{label default_description /}
-				{input default_description}
-
-			</div>
-
-			<h3>Systém</h3>
-			<div>
-				{label version /}
-				{input version}
-			</div>
-		</div>
-			<p>{input save}</p>
-		{/form}
+		<p>&nbsp;</p>
 	</div>
+	{form settingForm}
+		<div class="row">
+			<div class="col-md-12">
+				<div id="accordion-1" class="accordion panel-group" role="tablist" aria-multiselectable="true">
+					<div class="panel panel-default">
+						<div class="panel-heading" role="tab" id="headingOne">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion-1" href="#collapseOne" aria-expanded="false" class="collapsed">
+									<span>SEO</span>
+									<i class="icon ti-arrow-circle-down"></i>
+								</a>
+							</h4>
+						</div>
+
+						<div id="collapseOne" class="panel-collapse collapse" style="">
+							<div class="panel-body">
+
+								<div class="form-group row">
+									<div class="col-md-12">
+										{label site_name /}
+										{input site_name, class => "form-control"}
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<div class="col-md-12">
+										{label default_keywords /}
+										{input default_keywords, class => "form-control"}
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<div class="col-md-12">
+										{label default_description /}
+										{input default_description, class => "form-control"}
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading" role="tab" id="headingTwo">
+							<h4 class="panel-title">
+								<a class="collapsed" data-toggle="collapse" data-parent="#accordion-1" href="#collapseTwo" aria-expanded="false">
+									<span>Systém</span>
+									<i class="icon ti-arrow-circle-down"></i>
+								</a>
+							</h4>
+						</div>
+						<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" style="">
+							<div class="panel-body">
+								<div class="form-group-row">
+									<div class="col-md-12">
+										{label version /}
+										{input version, class => "form-control"}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						{input save, class => "btn btn-primary"}
+					</div>
+				</div>
+			</div>
+		</div>
+	{/form}
 
 
 {/block}
