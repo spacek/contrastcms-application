@@ -94,7 +94,7 @@ class UserPresenter extends SecuredPresenter
 				$this->flashMessage('Položku se nepodařilo upravit, nebo nedošlo k žádné změně.');
 			}
 
-			$this->redirect("User:editUser", $id);
+			$this->redirect("User:edit", $id);
 
 		} else {
 			// Unset redudant fields
@@ -115,7 +115,7 @@ class UserPresenter extends SecuredPresenter
 
 			if ($result) {
 				$this->flashMessage('Položka byla úspěšně přidána.');
-				$this->redirect("User:editUser", $result);
+				$this->redirect("User:edit", $result);
 			} else {
 				$this->flashMessage('Položku se nepodařilo přidat.');
 				$this->redirect("User:default");
