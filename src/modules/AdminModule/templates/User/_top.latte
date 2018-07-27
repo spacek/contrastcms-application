@@ -1,0 +1,8 @@
+<ul class="nav nav-tabs" role="tablist">
+	<li class="nav-item">
+		<a class="active" n:href="User:default" class="nav-link {ifCurrent default} active{/ifCurrent}">Uživatelské účty</a>
+	</li>
+	<li class="nav-item">
+		<a n:if="$user->getIdentity()->group_id <= 3" n:href="User:add" class="nav-link  {ifCurrent add} active{/ifCurrent}">Přidat uživatele</a>
+	</li>
+</ul>

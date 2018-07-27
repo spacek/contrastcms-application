@@ -1,4 +1,0 @@
-<div class="top links">
-	<a {ifCurrent User:default}class="active" {/ifCurrent} n:href="User:default">Uživatelské účty</a>
-	<a n:if="$user->getIdentity()->group_id <= 3" {ifCurrent User:add}class="active" {/ifCurrent}n:href="User:add">Přidat uživatele</a>
-</div>

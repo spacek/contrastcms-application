@@ -53,11 +53,9 @@ class UserPresenter extends SecuredPresenter
 		$this->template->setFile(__DIR__ . "/../templates/User/edit.latte");
 	}
 
-	public function actionAddUser($id)
+	public function actionAdd()
 	{
 		$this["userForm"]["type"]->setValue("insert");
-		$this["userForm"]["id"]->setValue($id);
-
 		$this->template->setFile(__DIR__ . "/../templates/User/add.latte");
 	}
 
