@@ -12,10 +12,14 @@ use Nette\Utils\Validators;
 
 class SignPresenter extends AdminBasePresenter
 {
+	public function renderIn()
+	{
+		$this->template->setFile(__DIR__ . "/../templates/Sign/in.latte");
+	}
 
 	protected function createComponentSignInForm()
 	{
-		$form = new UI\Form;
+		$form = new UI\Form();
 
 		$form->addText('username', 'Uživatelské jméno')
 			->setRequired("Povinná položka")->getControlPrototype()->addAttributes(array("placeholder" => "Uživatelské jméno"));

@@ -1,24 +1,26 @@
 {layout "../@layout.latte"}
 {block #content}
-	<div class="box">
-		<a href="#"></a>
-		<img src="{$basePath}/backend/css/images/logo.png" alt="" />
+	<div class="full-height bg-white height-100">
+		<div class="vertical-align full-height pdd-horizon-70">
+			<div class="table-cell">
 
-		{form signInForm}
-			<fieldset>
-				{input username}
-				{input password}
-				<button type="submit">login</button>
-			</fieldset>
-		{/form}
+				<div class="pdd-horizon-15">
+					<h2>Login</h2>
+					<p class="mrg-btm-15 font-size-13">Please enter your user name and password to login</p>
+					{form signInForm}
+						<div class="form-group">
+							{input username, class => "form-control", placeholder => "User name"}
+						</div>
+						<div class="form-group">
+							{input password, class => "form-control", placeholder => "Your password"}
+						</div>
+						<button class="btn btn-info">Login</button>
+					{/form}
+				</div>
+			</div>
+		</div>
+		<div class="login-footer">
+			<span class="font-size-13 pull-right pdd-top-10">Forgot you password? <a n:href="Sign:forgottenPassword">Generate new</a></span>
+		</div>
 	</div>
-	<div id="flashes_login">
-		<ul class="errors" n:if="$form->hasErrors()">
-			<li n:foreach="$form->errors as $error">{$error}</li>
-		</ul>
-	</div>
-	<p>&nbsp;</p>
-	<p>
-		<a style="font-size: smaller;" n:href="Sign:forgottenPassword">I forgot my password</a>
-	</p>
 {/block}
