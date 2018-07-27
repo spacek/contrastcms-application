@@ -1,34 +1,68 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 
 <head>
-	<title>Contrast 4.6</title>
-	<meta charset="utf-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <title>ContrastCMS</title>
 
-	<!--[if lt IE 9]><script src="{$basePath}/js/html5shiv.js"></script><![endif]-->
-	<link rel="stylesheet" type="text/css" href="{$basePath}/backend/css/style.css" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="https://spacek.digital/cms/images/logo/favicon.png">
+
+    <!-- plugins css -->
+    <link rel="stylesheet" href="https://spacek.digital/cms/vendor/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="https://spacek.digital/cms/vendor/PACE/themes/blue/pace-theme-minimal.css" />
+    <link rel="stylesheet" href="https://spacek.digital/cms/vendor/perfect-scrollbar/css/perfect-scrollbar.min.css" />
+
+    <!-- core css -->
+    <link href="https://spacek.digital/cms/css/ei-icon.css" rel="stylesheet">
+    <link href="https://spacek.digital/cms/css/themify-icons.css" rel="stylesheet">
+    <link href="https://spacek.digital/cms/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://spacek.digital/cms/css/animate.min.css" rel="stylesheet">
+    <link href="https://spacek.digital/cms/css/app.css" rel="stylesheet">
 </head>
 
 <body>
-<div id="page-login">
+<div class="app">
+    <div class="authentication">
+        <div class="sign-in">
+            <div class="row no-mrg-horizon">
+                <div class="col-md-8 no-pdd-horizon d-none d-md-block">
+                    <div class="full-height bg" style="background-image: url('https://spacek.digital/cms/images/others/img-29.jpg')">
+                        <div class="img-caption">
+                            <h1 class="caption-title">ContrastCMS 5.0</h1>
+                            <p class="caption-text">Mangaing your website have never been easier.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 no-pdd-horizon">
+                    <div n:if="$flashes" id="flashes">
+                        <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+                    </div>
 
-	<div id="content">
-		{include #content}
-	</div>
+                    {include #content}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div n:if="$flashes" id="flashes">
-	<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
-</div>
+<!-- build:js https://spacek.digital/cms/js/vendor.js -->
+<!-- plugins js -->
+<script src="https://spacek.digital/cms/vendor/jquery/dist/jquery.min.js"></script>
+<script src="https://spacek.digital/cms/vendor/popper.js/dist/umd/popper.min.js"></script>
+<script src="https://spacek.digital/cms/vendor/bootstrap/dist/js/bootstrap.js"></script>
+<script src="https://spacek.digital/cms/vendor/PACE/pace.min.js"></script>
+<script src="https://spacek.digital/cms/vendor/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
+<!-- endbuild -->
 
-{block scripts}
-    <script type="text/javascript" src="{$basePath}/js/libs/jquery.min.js?v={$version}"></script>
-    <script src="{$basePath}/js/libs/netteForms.js?v={$version}"></script>
-    <script src="{$basePath}/js/contrast/admin.js?v={$version}"></script>
-    <script src="{$basePath}/backend/ckeditor/ckeditor.js?v={$version}"></script>
-    <script type="text/javascript" src="{$basePath}/js/libs/jquery-ui-1.10.0.custom.min.js"></script>
-    <script src="{$basePath}/js/libs/jquery.nestable.js"></script>
-{/block}
+<!-- build:js https://spacek.digital/cms/js/app.min.js -->
+<!-- core js -->
+<script src="https://spacek.digital/cms/js/app.js"></script>
+<script src="{$basePath}/js/libs/netteForms.js?v={$version}"></script>
+<!-- endbuild -->
+
+<!-- page js -->
 
 </body>
 
