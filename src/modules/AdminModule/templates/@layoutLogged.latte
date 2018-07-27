@@ -236,11 +236,6 @@
             <!-- Content Wrapper START -->
             <div class="main-content">
                 <div class="container-fluid">
-
-                    <div n:if="$flashes" id="flashes">
-                        <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
-                    </div>
-
                     {include #content}
                 </div>
             </div>
@@ -275,6 +270,30 @@
 <!-- core js -->
 <script src="https://spacek.digital/cms/js/app.js"></script>
 <!-- endbuild -->
+
+<!-- page plugins js -->
+<script src="https://spacek.digital/cms/vendor/datatables/media/js/jquery.dataTables.js"></script>
+<script src="https://spacek.digital/cms/vendor/noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+<script src="https://spacek.digital/cms//js/table/data-table.js"></script>
+
+<script n:if="$flashes" type="text/javascript">
+    $(document).ready(function() {
+        {foreach $flashes as $flash}
+        noty({
+            theme: 'app-noty',
+            text: {$flash->message},
+            type: "Information", // {$flash->type}
+            timeout: 3000,
+            layout: "top",
+            closeWith: ['button', 'click'],
+            animation: {
+                open: 'noty-animation fadeIn',
+                close: 'noty-animation fadeOut'
+            }
+        });
+        {/foreach}
+    });
+</script>
 
 </body>
 
