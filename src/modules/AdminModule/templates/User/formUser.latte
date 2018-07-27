@@ -1,37 +1,60 @@
 {form userForm}
-	<fieldset>
 
-		<div class="form_center">
-
+	<div class="form-group row">
+		<div class="col-md-6">
 			{label username /}
-			{input username}
-
+			{input username, class => "form-control"}
+		</div>
+		<div class="col-md-6">
 			{label password /}
-			{input password}
+			{input password, class => "form-control"}
+		</div>
+	</div>
 
+	<div class="form-group row">
+		<div class="col-md-6">
 			{label name /}
-			{input name}
-
+			{input name, class => "form-control"}
+		</div>
+		<div class="col-md-6">
 			{label surname /}
-			{input surname}
+			{input surname, class => "form-control"}
+		</div>
+	</div>
 
-            {input group_id}
-            {label group_id /}
+	<div class="form-group row">
 
+	</div>
+
+	<div class="form-group row">
+		<div class="col-md-12">
+			{label group_id /}
+			{input group_id, class => "form-control"}
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<div class="col-md-12">
 			{label email /}
-			{input email}
+			{input email, class => "form-control"}
+		</div>
+	</div>
 
+	<div class="form-group row">
+		<div class="col-md-12">
 			{label skype /}
-			{input skype}
+			{input skype, class => "form-control"}
+		</div>
+	</div>
 
+	<div class="form-group row">
+		<div class="col-md-12">
 			{label phone /}
-			{input phone}
-
+			{input phone, class => "form-control"}
 		</div>
+	</div>
 
-		<div class="form_bottom">
-			{input save}
-		</div>
-
-	</fieldset>
+	<div class="form-group row">
+		{input save, class => "btn btn-primary"}
+	</div>
 {/form}

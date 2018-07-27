@@ -1,7 +1,19 @@
 {block #content}
-	<div class="detail">
-		<h2>Nový uživatel</h2>
-		{include 'top.latte'}
-		{include 'formUser.latte'}
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-block">
+					<h4 class="card-title">
+						Nový uživatel
+					</h4>
+					{include "top.latte"}
+				</div>
+			</div>
+			<div class="card">
+				<div class="card-block">
+					{include 'formUser.latte'}
+				</div>
+			</div>
+		</div>
 	</div>
 {/block}
