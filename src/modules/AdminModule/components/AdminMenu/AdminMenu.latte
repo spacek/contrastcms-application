@@ -1,5 +1,6 @@
-<li n:foreach="$modules as $module" class="nav-item {ifCurrent $controller} active{/ifCurrent}">
-    {var $controller = str_replace("default", "*", $module->presenter)}
+{foreach $modules as $module}
+{var $controller = str_replace("default", "*", $module->presenter)}
+<li class="nav-item {ifCurrent $controller} active{/ifCurrent}">
     <a class="{if $iterator->isFirst()}mrg-top-30{/if}" href="{plink $module->presenter}">
                                 <span class="icon-holder">
 										<i class="{$module->icon}"></i>
@@ -7,3 +8,4 @@
         <span class="title">{$module->name}</span>
     </a>
 </li>
+{/foreach}
