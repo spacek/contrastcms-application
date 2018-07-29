@@ -6,7 +6,7 @@ class ModuleRepository extends Repository
 {
 	public function getEnabled()
 	{
-		$modules = $this->findBy(array("enabled" => 1), "id ASC");
+		$modules = $this->findBy(array('enabled' => 1), 'id ASC');
 
 		if ($modules) {
 			return $modules;
@@ -15,9 +15,9 @@ class ModuleRepository extends Repository
 		return array();
 	}
 
-	public function getTopMenu()
+	public function getTopMenu($parentId)
 	{
-		$modules = $this->findBy(array("enabled" => 1, "in_menu" => 1), "id ASC");
+		$modules = $this->findBy(array('enabled' => 1, 'in_menu' => 1, 'parent_id' => $parentId), 'id ASC');
 
 		if ($modules) {
 			return $modules;

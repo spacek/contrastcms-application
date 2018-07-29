@@ -21,7 +21,6 @@
                                 </span>
             </a>
             {var $submodules = $moduleRepository->getTopMenu($module->id)}
-            {dump $submodules}
             <ul n:if="$submodules && $submodules->count()" class="dropdown-menu">
                 {foreach $submodules as $submodule}
                     {var $sController = str_replace("default", "*", $submodule->presenter)}
