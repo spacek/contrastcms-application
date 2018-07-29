@@ -1,11 +1,35 @@
 {foreach $modules as $module}
-{var $controller = str_replace("default", "*", $module->presenter)}
-<li class="nav-item {ifCurrent $controller} active{/ifCurrent}">
-    <a class="{if $iterator->isFirst()}mrg-top-30{/if}" href="{plink $module->presenter}">
+    {var $controller = str_replace("default", "*", $module->presenter)}
+    {if $controller != "#"}
+        <li class="nav-item {ifCurrent $controller} active{/ifCurrent}">
+            <a class="{if $iterator->isFirst()}mrg-top-30{/if}" href="{plink $module->presenter}">
                                 <span class="icon-holder">
 										<i class="{$module->icon}"></i>
 									</span>
-        <span class="title">{$module->name}</span>
-    </a>
-</li>
+                <span class="title">{$module->name}</span>
+            </a>
+        </li>
+    {else}
+        <li class="nav-item dropdown">
+            <a class="dropdown-toggle" href="javascript:void(0);">
+                            <span class="icon-holder">
+                                    <i class="{$module->icon}"></i>
+                                </span>
+                <span class="title">{$module->name}</span>
+                <span class="arrow">
+                                    <i class="ti-angle-right"></i>
+                                </span>
+            </a>
+            {var $submodules = $moduleRepository->getTopMenu($module->id)}
+            {dump $submodules}
+            <ul n:if="$submodules && $submodules->count()" class="dropdown-menu">
+                {foreach $submodules as $submodule}
+                    {var $sController = str_replace("default", "*", $submodule->presenter)}
+                    <li class="{ifCurrent $sController}active{/ifCurrent}">
+                        <a href="{plink $submodule->presenter}">{$submodule->name}</a>
+                    </li>
+                {/foreach}
+            </ul>
+        </li>
+    {/if}
 {/foreach}

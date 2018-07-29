@@ -23,12 +23,8 @@ abstract class AdminBasePresenter extends \BasePresenter
 
 	protected function createComponentAdminMenu()
 	{
-
 		$modulesProvider = $this->context->getService("moduleRepository");
-		$modules = $modulesProvider->getTopMenu();
-
-		$menu = new AdminMenu();
-		$menu->setModules($modules);
+		$menu = new AdminMenu($modulesProvider);
 		return $menu;
 	}
 
