@@ -25,6 +25,7 @@ abstract class BasePresenter extends UI\Presenter
 
 		$this->template->systemImage = $this->configParams["application"]["systemImage"] ?? "img-29.jpg";
 		$this->template->systemName = $this->configParams["application"]["systemName"] ?? "Contrast CMS";
+		$this->template->systemClaim = $this->configParams["application"]["systemClaim"] ?? "Mangaing your website have never been easier.";
 
 		$this->lang = "cs_CZ";
 		$this->template->language = $this->lang;
