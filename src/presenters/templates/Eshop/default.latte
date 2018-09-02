@@ -1,0 +1,31 @@
+{block #content}
+<section class="section-products-list-filters">
+	<div class="container">
+		<div class="breadcrumbs">
+			<a n:href="Homepage:default">{_"layout.home"}</a>
+			<span class="divider">&gt;</span>
+			<a href="#"><strong>{$category->name}</strong></a>
+		</div>
+		<h1>{$category->name}</h1>
+		<div class="sorting">
+			<a {if $sort_by == 'id' && $sort == 'desc'} class="active" {/if} n:href="this, sort_by => 'id', sort => 'desc'">{_"filters.recommended"}</a>
+			<a {if $sort_by == 'price' && $sort == 'asc'} class="active" {/if} n:href="this, sort_by => 'price', sort => 'asc'">{_"filters.lowest_price"}</a>
+			<a {if $sort_by == 'price' && $sort == 'desc'} class="active" {/if} n:href="this, sort_by => 'price', sort => 'desc'">{_"filters.highest_price"}</a>
+			<a {if $sort_by == 'name' && $sort == 'asc'} class="active" {/if} n:href="this, sort_by => 'name', sort => 'asc'">{_"filters.az"}</a>
+			<a {if $sort_by == 'name' && $sort == 'desc'} class="active" {/if} n:href="this, sort_by => 'name', sort => 'desc'">{_"filters.za"}</a>
+		</div>
+	</div>
+</section>
+
+<section class="section-products products-list">
+	<div class="container">
+		<div class="boxes">
+			<div n:foreach="$products as $item" class="box">
+				{include "./_product.latte", item => $item}
+			</div>
+		</div>
+		<div class="row text-center">
+			{control vp}
+		</div>
+	</div>
+</section>

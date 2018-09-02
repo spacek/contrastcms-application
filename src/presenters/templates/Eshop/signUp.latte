@@ -1,0 +1,83 @@
+{block #content}
+<section class="section-eshop">
+	<div class="container text-center">
+		<h1>Registration</h1>
+		<form action="{plink Eshop:shipping}" method="get">
+			<fieldset>
+				<div class="cols only-one">
+					<div class="cols-heading">
+						<div class="account-type">
+							<span class="text">Company</span>
+							<label class="blind" for="account-type">Account type</label>
+							<input type="checkbox" class="account-type-checkbox" name="account-type" id="account-type"/>
+							<span class="text">Personal</span>
+						</div>
+					</div>
+					<div class="col middle">
+						<div class="inner">
+							<h3>LOG IN VIA</h3>
+							<div class="social">
+								<a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+								<a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+							</div>
+							<p class="gap">&nbsp;</p>
+							<h3>Custumer information</h3>
+							<p>
+								<label for="name">Name <span class="red">*</span></label>
+								<input type="text" name="name" id="name" placeholder=""/>
+							</p>
+							<p>
+								<label for="phone">Phone <span class="red">*</span></label>
+								<input type="text" name="phone" id="phone" placeholder=""/>
+							</p>
+							<p>
+								<label for="email">E-mail <span class="red">*</span></label>
+								<input type="text" name="email" id="email" placeholder=""/>
+							</p>
+							<p class="gap">&nbsp;</p>
+							<h3>Billing information</h3>
+							<p>
+								<label for="address">Address <span class="red">*</span></label>
+								<input type="text" name="address" id="address" placeholder=""/>
+							</p>
+							<p>
+								<label for="city">City <span class="red">*</span></label>
+								<input type="text" name="city" id="city" placeholder=""/>
+							</p>
+							<p>
+								<label for="street">ZIP / Post Code: <span class="red">*</span></label>
+								<input type="text" name="street" id="street" placeholder=""/>
+							</p>
+							<p>
+								<label for="state">State <span class="red">*</span></label>
+								<select name="state" id="state">
+									<option>Czech republic</option>
+									<option>Option 2</option>
+									<option>Option 3</option>
+									<option>Option 4</option>
+								</select>
+							</p>
+							<p class="text checkbox">
+								<input type="checkbox" name="shipping-is-the-same" id="shipping-is-the-same"/>
+								<label for="shipping-is-the-same">Shipping adress is same as billing</label>
+							</p>
+							<p class="text checkbox">
+								<input type="checkbox" name="save-this-address" id="save-this-address"/>
+								<label for="save-this-address">Save this adress</label>
+							</p>
+							<p class="text checkbox">
+								<input type="checkbox" name="terms" id="terms"/>
+								<label for="terms">I agree with <a href="#">terms and conditions</a></label>
+							</p>
+							<p class="gap">&nbsp;</p>
+							<p class="last">
+								<button type="submit" class="button red-filled">Registration</button>
+							</p>
+							<p class="text">Položky označené hvezdičkou jsou povinné</p>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</section>

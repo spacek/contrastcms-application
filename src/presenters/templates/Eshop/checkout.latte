@@ -1,0 +1,72 @@
+{block #content}
+<section class="section-eshop">
+	<div class="container">
+		<h2>Shopping cart</h2>
+		{form checkoutForm}
+			<fieldset>
+				{control checkoutSteps}
+				<div class="cols">
+					<div class="col">
+						<div class="inner">
+							<h3>Customer information</h3>
+							<p>
+								<label for="name">Name <span class="red">*</span></label>
+								<input type="text" n:name="name" id="name" placeholder=""/>
+							</p>
+							<p>
+								<label for="phone">Phone <span class="red">*</span></label>
+								<input type="text" n:name="phone" id="phone" placeholder=""/>
+							</p>
+							<p>
+								<label for="email">E-mail <span class="red">*</span></label>
+								<input type="text" n:name="email" id="email" placeholder=""/>
+							</p>
+							<p class="gap">&nbsp;</p>
+							<p class="text">Položky označené hvezdičkou jsou povinné</p>
+						</div>
+					</div>
+					<div class="col right" style="padding-top: 0px;">
+						<h3>Shipping information</h3>
+						<p>
+							<label for="address">Address <span class="red">*</span></label>
+							<input type="text" n:name="street" id="address" placeholder=""/>
+						</p>
+						<p>
+							<label for="city">City <span class="red">*</span></label>
+							<input type="text" n:name="city" id="city" placeholder=""/>
+						</p>
+						<p>
+							<label for="street">ZIP / Post Code: <span class="red">*</span></label>
+							<input type="text" n:name="zip" id="street" placeholder=""/>
+						</p>
+					</div>
+				</div>
+				<div class="cart-final-price">
+					<div class="half left">
+						<p class="checkbox">
+							<input type="checkbox" n:name="news" id="news"/>
+							<label for="news">I do not agree with sending marketing materials</label>
+						</p>
+						<p class="checkbox last">
+							<input type="checkbox" n:name="terms" id="terms"/>
+							<label for="terms">I agree with <a href="#">terms and conditions</a></label>
+						</p>
+					</div>
+					<div class="half right">
+						<p>Total price witout VAT: <strong>{$basketTotal|number:0:',':' '} Kč</strong></p>
+						<p class="last">Total price: <span class="red">{$basketTotalWithVat|number:0:',':' '} Kč</span>
+						</p>
+					</div>
+				</div>
+				<div class="cart-buttons-bottom">
+					<div class="left">
+						<a class="link-text" n:href="Eshop:cart"><i class="fas fa-angle-double-left"></i> <span>Back to shopping cart</span></a>
+					</div>
+					<div class="right">
+						<button type="submit" class="button red-filled">Continue</button>
+					</div>
+				</div>
+			</fieldset>
+		{/form}
+	</div>
+</section>

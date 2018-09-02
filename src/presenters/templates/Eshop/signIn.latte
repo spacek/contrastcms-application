@@ -1,0 +1,26 @@
+{block #content}
+<section class="section-eshop white">
+	<div class="container text-center">
+		<h2>Přihlášení</h2>
+		<div class="cols">
+			<div class="one-col">
+				{form signInForm}
+					<fieldset>
+						<p>
+							<label class="blind" for="email">E-mail *</label>
+							<input type="text" n:name="email" id="email" placeholder="E-mail *"/>
+						</p>
+						<p>
+							<label class="blind" for="password1">Heslo *</label>
+							<input type="password" n:name="password" id="password1" placeholder="Heslo *"/>
+						</p>
+						<p class="text-center">
+							<button class="button yellow-filled" type="submit">Přihlásit se</button>
+						</p>
+					</fieldset>
+				{/form}
+				<p>Nemáte ještě účet? <a n:href="Eshop:signUp">Registrujte se</a></p>
+			</div>
+		</div>
+	</div>
+</section>

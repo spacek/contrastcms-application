@@ -1,0 +1,106 @@
+{block content}
+<section class="section-products-top">
+	<div class="container">
+		<div class="breadcrumbs">
+			<a href="#">Home</a>
+			{if $category}
+				<span class="divider">&gt;</span>
+				<a n:href="Eshop:default $category->id">{$category->name}</a>
+			{/if}
+			{if $subcategory}
+				<span class="divider">&gt;</span>
+				<a n:href="Eshop:default $subcategory->id">{$subcategory->name}</a>
+			{/if}
+			<span class="divider">&gt;</span>
+			<a href="#"><strong>{$product->name}</strong></a>
+		</div>
+		<div class="arrows">
+			<a n:if="$previousProduct" class="prev" n:href="Eshop:detail $previousProduct->id"><i
+						class="fas fa-angle-double-left"></i> <span>Previous</span></a>
+			<span class="divider">&nbsp;</span>
+			<a n:if="$nextProduct" class="next" n:href="Eshop:detail $nextProduct->id"><span>Next</span> <i
+						class="fas fa-angle-double-right"></i></a>
+		</div>
+		<div class="product-description row">
+			<div class="half left">
+				<div class="product-gallery">
+					<div class="slide"><span><img class="zoom-photo" width="412" height="412"
+					                              data-magnify-src="{$basePath}/data/{$files->getFileName($product->file_id)}"
+					                              src="{$basePath}/data/{$files->getFileName($product->file_id)}"
+					                              alt=""/></span></div>
+				</div>
+				<div class="product-gallery-nav">
+					<div class="slide">
+						<div class="inner"><img src="{$basePath}/data/{$files->getFileName($product->file_id)}" alt=""/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="half right">
+				<div class="row">
+					<div class="reviews half left">
+					</div>
+					<div class="half right">
+						<div class="social-small">
+							<a class="fb-share" href="{plink //this}" target="_blank"><i class="fab fa-facebook-f"></i></a>
+							<a class="tw-share" href="{plink //this}" target="_blank"><i class="fab fa-twitter"></i></a>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<h1>{$product->name}</h1>
+					<p>
+						Quantity in package: {$product->product_qty}<br/>
+						Single product weight: {$product->weight} {$product->unit}
+					</p>
+					{$product->perex|noescape}
+					{$product->text|noescape}
+				</div>
+
+				<div class="row">
+					<div class="half left price">
+					</div>
+					{if $isB2b}
+						<div class="half right price">
+							<span class="price-big">Total price: <strong>{$presenter->getPriceWithVat($product->price, $product->vat) * $product->product_qty|number:2:',':' '} {$presenter->getCurrency()}</strong></span>
+							<span class="price-grey">{$presenter->getPriceWithoutVat($product->price) * $product->product_qty|number:2:',':' '} {$presenter->getCurrency()}
+								without VAT</span>
+						</div>
+					{else}
+						<div class="half right price">
+							<span class="price-big">Total price: <strong>{$presenter->getPriceWithVat($product->price, $product->vat)|number:2:',':' '} {$presenter->getCurrency()}</strong></span>
+							<span class="price-grey">{$presenter->getPriceWithoutVat($product->price)|number:2:',':' '} {$presenter->getCurrency()}
+								without VAT</span>
+						</div>
+					{/if}
+				</div>
+				<div class="row">
+					<div class="half left price" style="width: 35%;"></div>
+					<div class="half right buy" style="width: 65%;">
+						{form addToCart, product_id => $product->id}
+							<fieldset>
+								<p>
+									<input type="number" n:name="qty" id="qty" value="1"/>
+									<label for="pieces">{if $isB2b}package/s{else}pcs{/if}</label>
+								</p>
+								<p>
+									<button type="submit" class="button red-filled"><i class="fas fa-shopping-cart"></i>
+										Add to cart
+									</button>
+								</p>
+
+								<input type="hidden" id="product_id" n:name="product_id" value="{$product->id}"/>
+							</fieldset>
+						{/form}
+
+					</div>
+				</div>
+				<div class="row last">
+					<div class="half right product-id">
+						<p>Product ID: <strong>{$product->ean}</strong></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
