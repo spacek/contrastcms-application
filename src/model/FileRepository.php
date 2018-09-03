@@ -73,7 +73,7 @@ class FileRepository extends Repository
 
 	public function getFileType($id)
 	{
-		$row = $this->findById($id);
+		$row = $this->findById($id)->fetch();
 		return $row->type ?? "file";
 	}
 
