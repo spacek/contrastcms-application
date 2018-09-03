@@ -15,10 +15,10 @@
             {var $sController = str_replace("default", "*", $submodule->presenter)}
             {var $isModuleActive = false}
             {ifCurrent $sController}
-                {var $isModuleActive = false}
+                {var $isModuleActive = true}
             {/ifCurrent}
         {/foreach}
-        <li class="nav-item dropdown{if $isModuleActive} active{/if}">
+        <li class="nav-item dropdown{if $isModuleActive} active open{/if}">
             <a class="dropdown-toggle" href="javascript:void(0);">
                             <span class="icon-holder">
                                     <i class="{$module->icon}"></i>
