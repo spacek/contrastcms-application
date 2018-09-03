@@ -10,7 +10,15 @@
             </a>
         </li>
     {else}
-        <li class="nav-item dropdown">
+        {var $submodules = $moduleRepository->getTopMenu($module->id)}
+        {foreach $submodules as $submodule}
+            {var $sController = str_replace("default", "*", $submodule->presenter)}
+            {var $isModuleActive = false}
+            {ifCurrent $sController}
+                {var $isModuleActive = false}
+            {/ifCurrent}
+        {/foreach}
+        <li class="nav-item dropdown{if $isModuleActive} active{/if}">
             <a class="dropdown-toggle" href="javascript:void(0);">
                             <span class="icon-holder">
                                     <i class="{$module->icon}"></i>
@@ -20,7 +28,6 @@
                                     <i class="ti-angle-right"></i>
                                 </span>
             </a>
-            {var $submodules = $moduleRepository->getTopMenu($module->id)}
             <ul n:if="$submodules && $submodules->count()" class="dropdown-menu">
                 {foreach $submodules as $submodule}
                     {var $sController = str_replace("default", "*", $submodule->presenter)}
