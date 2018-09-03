@@ -11,9 +11,9 @@
         </li>
     {else}
         {var $submodules = $moduleRepository->getTopMenu($module->id)}
+        {var $isModuleActive = false}
         {foreach $submodules as $submodule}
             {var $sController = str_replace("default", "*", $submodule->presenter)}
-            {var $isModuleActive = false}
             {ifCurrent $sController}
                 {var $isModuleActive = true}
             {/ifCurrent}
