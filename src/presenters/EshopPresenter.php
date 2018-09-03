@@ -1,6 +1,6 @@
 <?php
 
-class EshopPresenter extends ChocotopiaBasePresenter
+class EshopPresenter extends BasePresenter
 {
 	/** @persistent */
 	public $sort_by = "id";

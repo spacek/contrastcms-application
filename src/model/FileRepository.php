@@ -70,6 +70,13 @@ class FileRepository extends Repository
 		return "";
 	}
 
+
+	public function getFileType($id)
+	{
+		$row = $this->findById($id);
+		return $row->type ?? "file";
+	}
+
 	public function getFilenameResized($id, $width = null, $height = null, $cropPosition = "center")
 	{
 		$row = $this->findById($id);
