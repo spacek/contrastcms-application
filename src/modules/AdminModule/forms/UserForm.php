@@ -24,7 +24,6 @@ final class UserForm extends Form
 		$this->addPassword('password', 'Heslo:');
 		$this->addText('email', 'E-mail:');
 		$this->addSelect("group_id", "Typ uživatelského účtu", [
-			2 => "Superadministrátor",
 			3 => "Administrátor",
 			4 => "Editor"
 		]);

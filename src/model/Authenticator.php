@@ -29,7 +29,7 @@ class Authenticator implements Nette\Security\IAuthenticator
 			throw new Nette\Security\AuthenticationException('The username is incorrect.', self::IDENTITY_NOT_FOUND);
 		}
 
-		if (Nette\Security\Passwords::verify($password, $row->password)) {
+		if (Nette\Security\Passwords::verify($password, $row->password) === false) {
 			throw new Nette\Security\AuthenticationException('The password is incorrect.', self::INVALID_CREDENTIAL);
 		}
 

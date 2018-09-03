@@ -72,14 +72,14 @@ class UserPresenter extends SecuredPresenter
 	{
 		$values = $form->getValues();
 
-		if ($values->type == "edit") {
+		if ($values->type === "edit") {
 
 			// Unset redudant fields
 			$id = $values->id;
 			unset($values->id);
 			unset($values->type);
 
-			if (trim($values->password) != "") {
+			if (trim($values->password) !== "") {
 				$values->password = Passwords::hash($values->password);
 			} else {
 				unset($values->password);
@@ -104,7 +104,7 @@ class UserPresenter extends SecuredPresenter
 			// Extend store array
 			$values->created_at = date("Y-m-d H:i:s");
 
-			if (trim($values->password) != "") {
+			if (trim($values->password) !== "") {
 				$values->password = Passwords::hash($values->password);
 			} else {
 				unset($values->password);
