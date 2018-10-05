@@ -19,13 +19,12 @@ class CrudRepository
 		return $this->table($name);
 	}
 
+	public function query($sql) {
+		return $this->connection->query($sql);
+	}
+
 	public function __construct(Nette\Database\Context $db)
 	{
 		$this->connection = $db;
-	}
-
-	public function getInsertId()
-	{
-		return $this->getInsertId();
 	}
 }
