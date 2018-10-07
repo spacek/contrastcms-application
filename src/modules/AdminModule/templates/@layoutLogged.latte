@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://spacek.digital/cms/vendor/PACE/themes/blue/pace-theme-minimal.css" />
     <link rel="stylesheet" href="https://spacek.digital/cms/vendor/perfect-scrollbar/css/perfect-scrollbar.min.css" />
     <link rel="stylesheet" href="https://spacek.digital/cms/vendor/datatables/media/css/jquery.dataTables.css" />
+    <link rel="stylesheet" href="https://spacek.digital/cms/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css" />
 
 
     <!-- core css -->
@@ -275,6 +276,8 @@
 <script src="https://spacek.digital/cms//js/table/data-table.js"></script>
 <script src="//cdn.ckeditor.com/4.10.1/standard/ckeditor.js"></script>
 
+<script src="https://spacek.digital/cms/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+
 <script n:if="$flashes" type="text/javascript">
     $(document).ready(function() {
         {foreach $flashes as $flash}
@@ -298,6 +301,9 @@
         $('.ckeditor').each(function () {
             CKEDITOR.replace( this);
         });
+
+        $('.datepicker-1').datepicker();
+
     });
 </script>
 
