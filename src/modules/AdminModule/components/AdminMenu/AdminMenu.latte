@@ -2,7 +2,7 @@
     {var $controller = str_replace("default", "*", $module->presenter)}
     {if $controller != "#"}
         <li class="nav-item {ifCurrent $controller} active{/ifCurrent}">
-            <a class="{if $iterator->isFirst()}mrg-top-30{/if}" href="{plink $module->presenter}">
+            <a class="{if $iterator->isFirst()}mrg-top-30{/if}" href="{plink $module->presenter, parent_id => null, submodule => null}">
                                 <span class="icon-holder">
 										<i class="{$module->icon}"></i>
 									</span>
@@ -32,7 +32,7 @@
                 {foreach $submodules as $submodule}
                     {var $sController = str_replace("default", "*", $submodule->presenter)}
                     <li class="{ifCurrent $sController}active{/ifCurrent}">
-                        <a href="{plink $submodule->presenter}">{$submodule->name}</a>
+                        <a href="{plink $submodule->presenter, parent_id => null, submodule => null}">{$submodule->name}</a>
                     </li>
                 {/foreach}
             </ul>
