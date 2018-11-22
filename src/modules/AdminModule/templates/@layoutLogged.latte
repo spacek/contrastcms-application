@@ -2,248 +2,253 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-    <title>ContrastCMS</title>
+	<meta charset="utf-8">
+	<meta name="viewport"
+	      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+	<title>ContrastCMS</title>
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="https://spacek.digital/cms/images/logo/favicon.png">
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="https://spacek.digital/cms/images/logo/favicon.png">
 
-    <!-- plugins css -->
-    <link rel="stylesheet" href="https://spacek.digital/cms/vendor/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="https://spacek.digital/cms/vendor/PACE/themes/blue/pace-theme-minimal.css" />
-    <link rel="stylesheet" href="https://spacek.digital/cms/vendor/perfect-scrollbar/css/perfect-scrollbar.min.css" />
-    <link rel="stylesheet" href="https://spacek.digital/cms/vendor/datatables/media/css/jquery.dataTables.css" />
-    <link rel="stylesheet" href="https://spacek.digital/cms/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css" />
+	<!-- plugins css -->
+	<link rel="stylesheet" href="https://spacek.digital/cms/vendor/bootstrap/dist/css/bootstrap.css"/>
+	<link rel="stylesheet" href="https://spacek.digital/cms/vendor/PACE/themes/blue/pace-theme-minimal.css"/>
+	<link rel="stylesheet" href="https://spacek.digital/cms/vendor/perfect-scrollbar/css/perfect-scrollbar.min.css"/>
+	<link rel="stylesheet" href="https://spacek.digital/cms/vendor/datatables/media/css/jquery.dataTables.css"/>
+	<link rel="stylesheet"
+	      href="https://spacek.digital/cms/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css"/>
 
 
-    <!-- core css -->
-    <link href="{$basePath}/cms/dist/assets/css/ei-icon.css" rel="stylesheet">
-    <link href="{$basePath}/cms/dist/assets/css/themify-icons.css" rel="stylesheet">
-    <link href="{$basePath}/cms/dist/assets/css/font-awesome.min.css" rel="stylesheet">
-    <link href="https://spacek.digital/cms/css/animate.min.css" rel="stylesheet">
-    <link href="https://spacek.digital/cms/css/app.css" rel="stylesheet">
-    <link href="https://spacek.digital/cms/css/custom.css" rel="stylesheet">
+	<!-- core css -->
+	<link href="{$basePath}/cms/dist/assets/css/ei-icon.css" rel="stylesheet">
+	<link href="{$basePath}/cms/dist/assets/css/themify-icons.css" rel="stylesheet">
+	<link href="{$basePath}/cms/dist/assets/css/font-awesome.min.css" rel="stylesheet">
+	<link href="https://spacek.digital/cms/css/animate.min.css" rel="stylesheet">
+	<link href="https://spacek.digital/cms/css/app.css" rel="stylesheet">
+	<link href="https://spacek.digital/cms/css/custom.css" rel="stylesheet">
+	<link href="{$basePath}/cms/css/skin.css" rel="stylesheet">
 
-    <script type="text/javascript">
-        var imagesGetter = {plink File:imagesJson};
-        var imageUploadUrl = {plink File:imageUploadAction};
-        var fileUploadUrl = {plink File:fileUploadAction};
-        var basePath =  {$basePath};
-    </script>
+	<script type="text/javascript">
+		var imagesGetter = {plink File:imagesJson};
+		var imageUploadUrl = {plink File:imageUploadAction};
+		var fileUploadUrl = {plink File:fileUploadAction};
+		var basePath =  {$basePath};
+	</script>
 </head>
 
 <body>
 <div class="app">
-    <div class="layout">
-        <!-- Side Nav START -->
-        <div class="side-nav">
-            <div class="side-nav-inner">
-                <div class="side-nav-logo">
-                    <a href="{plink Homepage:default}">
-                        <div class="logo"><h3 style="padding: 13px 0;">{$systemName}</h3></div>
-                    </a>
-                    <div class="mobile-toggle side-nav-toggle">
-                        <a href="">
-                            <i class="ti-arrow-circle-left"></i>
-                        </a>
-                    </div>
-                </div>
-                <ul class="side-nav-menu scrollable">
-                    {control adminMenu}
-                </ul>
-            </div>
-        </div>
-        <!-- Side Nav END -->
+	<div class="layout">
+		<!-- Side Nav START -->
+		<div class="side-nav">
+			<div class="side-nav-inner">
+				<div class="side-nav-logo">
+					<a href="{plink Homepage:default}">
+						<div class="logo"><h3 style="padding: 13px 0;">{$systemName}</h3></div>
+					</a>
+					<div class="mobile-toggle side-nav-toggle">
+						<a href="">
+							<i class="ti-arrow-circle-left"></i>
+						</a>
+					</div>
+				</div>
+				<ul class="side-nav-menu scrollable">
+					{control adminMenu}
+				</ul>
+			</div>
+		</div>
+		<!-- Side Nav END -->
 
-        <!-- Page Container START -->
-        <div class="page-container">
-            <!-- Header START -->
-            <div class="header navbar">
-                <div class="header-container">
-                    <ul class="nav-left">
-                        <li class="search-box">
-                            <a class="search-toggle no-pdd-right" href="javascript:void(0);">
-                                <i class="search-icon ti-search pdd-right-10"></i>
-                                <i class="search-icon-close ti-close pdd-right-10"></i>
-                            </a>
-                        </li>
-                        {*<li class="search-input">
-                            <input class="form-control" type="text" placeholder="Search...">
-                            <div class="advanced-search">
-                                <div class="search-wrapper">
-                                    <div class="pdd-vertical-10">
-                                            <span class="display-block mrg-vertical-5 pdd-horizon-20 text-gray">
+		<!-- Page Container START -->
+		<div class="page-container">
+			<!-- Header START -->
+			<div class="header navbar">
+				<div class="header-container">
+					<ul class="nav-left">
+						<li class="search-box">
+							<a class="search-toggle no-pdd-right" href="javascript:void(0);">
+								<i class="search-icon ti-search pdd-right-10"></i>
+								<i class="search-icon-close ti-close pdd-right-10"></i>
+							</a>
+						</li>
+						{*<li class="search-input">
+							<input class="form-control" type="text" placeholder="Search...">
+							<div class="advanced-search">
+								<div class="search-wrapper">
+									<div class="pdd-vertical-10">
+											<span class="display-block mrg-vertical-5 pdd-horizon-20 text-gray">
 													<i class="ti-user pdd-right-5"></i>
 													<span>People</span>
-                                            </span>
-                                        <ul class="list-unstyled list-info">
-                                            <li>
-                                                <a href="">
-                                                    <img class="thumb-img" src="https://spacek.digital/cms/images/avatars/thumb-1.jpg" alt="">
-                                                    <div class="info">
-                                                        <span class="title">Jordan Hurst</span>
-                                                        <span class="sub-title">
+											</span>
+										<ul class="list-unstyled list-info">
+											<li>
+												<a href="">
+													<img class="thumb-img" src="https://spacek.digital/cms/images/avatars/thumb-1.jpg" alt="">
+													<div class="info">
+														<span class="title">Jordan Hurst</span>
+														<span class="sub-title">
 																	<i class="ti-location-pin"></i>
 																	<span>44 Shirley Ave. West Chicago</span>
-                                                            </span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="">
-                                                    <img class="thumb-img" src="https://spacek.digital/cms/images/avatars/thumb-5.jpg" alt="">
-                                                    <div class="info">
-                                                        <span class="title">Jennifer Watkins</span>
-                                                        <span class="sub-title">
+															</span>
+													</div>
+												</a>
+											</li>
+											<li>
+												<a href="">
+													<img class="thumb-img" src="https://spacek.digital/cms/images/avatars/thumb-5.jpg" alt="">
+													<div class="info">
+														<span class="title">Jennifer Watkins</span>
+														<span class="sub-title">
 																	<i class="ti-location-pin"></i>
 																	<span>514 S. Magnolia St. Orlando</span>
-                                                            </span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="">
-                                                    <img class="thumb-img" src="https://spacek.digital/cms/images/avatars/thumb-4.jpg" alt="">
-                                                    <div class="info">
-                                                        <span class="title">Michael Birch</span>
-                                                        <span class="sub-title">
+															</span>
+													</div>
+												</a>
+											</li>
+											<li>
+												<a href="">
+													<img class="thumb-img" src="https://spacek.digital/cms/images/avatars/thumb-4.jpg" alt="">
+													<div class="info">
+														<span class="title">Michael Birch</span>
+														<span class="sub-title">
 																	<i class="ti-location-pin"></i>
 																	<span>70 Bowman St. South Windsor</span>
-                                                            </span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="mrg-horizon-20 border top"></div>
-                                    <div class="pdd-vertical-10">
-                                            <span class="display-block mrg-vertical-5 pdd-horizon-20 text-gray">
+															</span>
+													</div>
+												</a>
+											</li>
+										</ul>
+									</div>
+									<div class="mrg-horizon-20 border top"></div>
+									<div class="pdd-vertical-10">
+											<span class="display-block mrg-vertical-5 pdd-horizon-20 text-gray">
 													<i class="ti-rss pdd-right-5"></i>
 													<span>Post</span>
-                                            </span>
-                                        <ul class="list-unstyled list-info">
-                                            <li>
-                                                <a href="">
-                                                    <img class="thumb-img" src="https://spacek.digital/cms/images/img-1.jpg" alt="">
-                                                    <div class="info">
-                                                        <span class="title">Artoo expresses his relief</span>
-                                                        <span class="sub-title">
+											</span>
+										<ul class="list-unstyled list-info">
+											<li>
+												<a href="">
+													<img class="thumb-img" src="https://spacek.digital/cms/images/img-1.jpg" alt="">
+													<div class="info">
+														<span class="title">Artoo expresses his relief</span>
+														<span class="sub-title">
 																	<span>Oh, thank goodness we're coming out...</span>
-                                                            </span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="">
-                                                    <img class="thumb-img" src="https://spacek.digital/cms/images/img-2.jpg" alt="">
-                                                    <div class="info">
-                                                        <span class="title">Ready for some power?</span>
-                                                        <span class="sub-title">
+															</span>
+													</div>
+												</a>
+											</li>
+											<li>
+												<a href="">
+													<img class="thumb-img" src="https://spacek.digital/cms/images/img-2.jpg" alt="">
+													<div class="info">
+														<span class="title">Ready for some power?</span>
+														<span class="sub-title">
 																	<span>Lord Vader. You may take Caption So...</span>
-                                                            </span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="search-footer">
-                                    <span>You are Searching for '<b class="text-dark"><span class="serach-text-bind"></span></b>'</span>
-                                </div>
-                            </div>
-                        </li>*}
-                    </ul>
-                    <ul class="nav-right">
-                        <li class="user-profile dropdown">
-                            <a href="" class="dropdown-toggle" data-toggle="dropdown">
-                                <img class="profile-img img-fluid" src="https://spacek.digital/cms/images/user.jpg" alt="">
-                                <div class="user-info">
-                                    {var $userData = $user->getIdentity()->getData()}
-                                    <span class="name pdd-right-5">{$userData['name']} {$userData['surname']}</span>
-                                    <i class="ti-angle-down font-size-10"></i>
-                                </div>
-                            </a>
-                            <ul class="dropdown-menu">
-                                {*<li>
-                                    <a href="">
-                                        <i class="ti-settings pdd-right-10"></i>
-                                        <span>Setting</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <i class="ti-user pdd-right-10"></i>
-                                        <span>Profile</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <i class="ti-email pdd-right-10"></i>
-                                        <span>Inbox</span>
-                                    </a>
-                                </li>
-                                <li role="separator" class="divider"></li>*}
-                                <li>
-                                    <a n:href="Sign:logout">
-                                        <i class="ti-power-off pdd-right-10"></i>
-                                        <span>Logout</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="notifications dropdown">
-                            <span class="counter">0</span>
-                            <a href="" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="ti-bell"></i>
-                            </a>
+															</span>
+													</div>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="search-footer">
+									<span>You are Searching for '<b class="text-dark"><span class="serach-text-bind"></span></b>'</span>
+								</div>
+							</div>
+						</li>*}
+					</ul>
+					<ul class="nav-right">
+						<li class="user-profile dropdown">
+							<a href="" class="dropdown-toggle" data-toggle="dropdown">
+								<img class="profile-img img-fluid" src="https://spacek.digital/cms/images/user.jpg"
+								     alt="">
+								<div class="user-info">
+									{var $userData = $user->getIdentity()->getData()}
+									<span class="name pdd-right-5">{$userData['name']} {$userData['surname']}</span>
+									<i class="ti-angle-down font-size-10"></i>
+								</div>
+							</a>
+							<ul class="dropdown-menu">
+								{*<li>
+									<a href="">
+										<i class="ti-settings pdd-right-10"></i>
+										<span>Setting</span>
+									</a>
+								</li>
+								<li>
+									<a href="">
+										<i class="ti-user pdd-right-10"></i>
+										<span>Profile</span>
+									</a>
+								</li>
+								<li>
+									<a href="">
+										<i class="ti-email pdd-right-10"></i>
+										<span>Inbox</span>
+									</a>
+								</li>
+								<li role="separator" class="divider"></li>*}
+								<li>
+									<a n:href="Sign:logout">
+										<i class="ti-power-off pdd-right-10"></i>
+										<span>Logout</span>
+									</a>
+								</li>
+							</ul>
+						</li>
+						<li class="notifications dropdown">
+							<span class="counter">0</span>
+							<a href="" class="dropdown-toggle" data-toggle="dropdown">
+								<i class="ti-bell"></i>
+							</a>
 
-                            <ul class="dropdown-menu ">
-                                <li class="notice-header">
-                                    <i class="ti-bell pdd-right-10"></i>
-                                    <span>Notifikace</span>
-                                </li>
-                                <li>
-                                    <ul class="list-info overflow-y-auto relative scrollable">
-                                        {*<li>
-                                            <a href="">
-                                                <img class="thumb-img" src="https://spacek.digital/cms/images/avatars/thumb-5.jpg" alt="">
-                                                <div class="info">
-                                                        <span class="title">
+							<ul class="dropdown-menu ">
+								<li class="notice-header">
+									<i class="ti-bell pdd-right-10"></i>
+									<span>Notifikace</span>
+								</li>
+								<li>
+									<ul class="list-info overflow-y-auto relative scrollable">
+										{*<li>
+											<a href="">
+												<img class="thumb-img" src="https://spacek.digital/cms/images/avatars/thumb-5.jpg" alt="">
+												<div class="info">
+														<span class="title">
 															<span class="font-size-14 text-semibold">Jennifer Watkins</span>
-                                                        <span class="text-gray">commented on your <span class="text-dark">post</span></span>
-                                                        </span>
-                                                    <span class="sub-title">5 mins ago</span>
-                                                </div>
-                                            </a>
-                                        </li>*}
-                                    </ul>
-                                </li>
+														<span class="text-gray">commented on your <span class="text-dark">post</span></span>
+														</span>
+													<span class="sub-title">5 mins ago</span>
+												</div>
+											</a>
+										</li>*}
+									</ul>
+								</li>
 
-                                <li class="notice-footer">
+								<li class="notice-footer">
                                         <span>
-                                            <a href="" class="text-gray">Check all notifications <i class="ei-right-chevron pdd-left-5 font-size-10"></i></a>
+                                            <a href="" class="text-gray">Check all notifications <i
+			                                            class="ei-right-chevron pdd-left-5 font-size-10"></i></a>
 										</span>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <!-- Header END -->
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!-- Header END -->
 
-            <!-- Content Wrapper START -->
-            <div class="main-content">
-                <div class="container-fluid">
-                    {include #content}
-                </div>
-            </div>
-            <!-- Content Wrapper END -->
+			<!-- Content Wrapper START -->
+			<div class="main-content">
+				<div class="container-fluid">
+					{include #content}
+				</div>
+			</div>
+			<!-- Content Wrapper END -->
 
-        </div>
-        <!-- Page Container END -->
+		</div>
+		<!-- Page Container END -->
 
-    </div>
+	</div>
 </div>
 
 <!-- build:js https://spacek.digital/cms/js/vendor.js -->
@@ -279,34 +284,34 @@
 <script src="https://spacek.digital/cms/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
 
 <script n:if="$flashes" type="text/javascript">
-    $(document).ready(function() {
-        {foreach $flashes as $flash}
-        noty({
-            theme: 'app-noty',
-            text: {$flash->message},
-            type: "{if $flash->type == 'info'}information{else}error{/if}",
-            timeout: 3000,
-            layout: "topRight",
-            closeWith: ['button', 'click'],
-            animation: {
-                open: 'noty-animation fadeIn',
-                close: 'noty-animation fadeOut'
-            }
-        });
-        {/foreach}
-    });
+	$(document).ready(function () {
+		{foreach $flashes as $flash}
+		noty({
+			theme: 'app-noty',
+			text: {$flash->message},
+			type: "{if $flash->type == 'info'}information{else}error{/if}",
+			timeout: 3000,
+			layout: "topRight",
+			closeWith: ['button', 'click'],
+			animation: {
+				open: 'noty-animation fadeIn',
+				close: 'noty-animation fadeOut'
+			}
+		});
+		{/foreach}
+	});
 </script>
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('.ckeditor').each(function () {
-            CKEDITOR.replace( this);
-        });
+	$(document).ready(function () {
+		$('.ckeditor').each(function () {
+			CKEDITOR.replace(this);
+		});
 
-        $('.datepicker').datepicker({
-            format: 'yyyy/mm/dd',
-        });
+		$('.datepicker').datepicker({
+			format: 'yyyy/mm/dd',
+		});
 
-    });
+	});
 </script>
 
 </body>
