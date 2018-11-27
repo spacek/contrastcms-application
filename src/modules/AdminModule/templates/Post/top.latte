@@ -14,19 +14,8 @@
 {if isset($id)}
 <div class="top languages">
 	<p style="margin-top: 0;">Upravujete jazyk</p>
-	<a {if $lang == "cs_CZ"}class="active"{/if} n:href="this, lang => 'cs_CZ'">Česky</a>
-    {*<a {if $lang == "sk_SK"}class="active"{/if} n:href="this, lang => 'sk_SK'">Slovenština</a>
-    <a {if $lang == "en_US"}class="active"{/if} n:href="this, lang => 'en_US'">Angličtina</a>
-    <a {if $lang == "es_ES"}class="active"{/if} n:href="this, lang => 'es_ES'">Španělština</a>
-    <a {if $lang == "ru_RU"}class="active"{/if} n:href="this, lang => 'ru_RU'">Ruština</a>
-    <a {if $lang == "lv_LV"}class="active"{/if} n:href="this, lang => 'lv_LV'">Lotyština</a>*}
+	{foreach $enabledLanguages as $key => $language}
+		<a {if $lang == $language}class="active"{/if} n:href="this, lang => $key">{$language}</a>
+	{/foreach}
 </div>
-
-{*<script type="text/javascript">
-	$(document).ready(
-			function() {
-				$("#left-tree-item-{$id|noescape}").addClass("active");
-			}
-	);
-</script>*}
 {/if}
