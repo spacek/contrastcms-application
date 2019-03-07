@@ -313,6 +313,8 @@
 </script>
 <script type="text/javascript">
 	$(document).ready(function () {
+		CKEDITOR.config.allowedContent = true;
+
 		$('.ckeditor').each(function () {
 			CKEDITOR.replace(this);
 		});
