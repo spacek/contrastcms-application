@@ -3,9 +3,8 @@
 namespace ContrastCms\Application\AdminModule;
 
 use Nette\ComponentModel\IContainer;
-use Nette\Forms\Form;
 
-final class SettingForm extends Form
+final class SettingForm extends \Nette\Application\UI\Form
 {
 
 	public function __construct(IContainer $parent = NULL, $name = NULL)
