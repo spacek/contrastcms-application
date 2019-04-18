@@ -34,8 +34,7 @@ abstract class BasePresenter extends UI\Presenter
 			$this->enabledLanguages['en_US'] = 'English';
 		}
 
-		$this->lang = "cs_CZ";
-		$this->template->language = $this->lang;
+		$this->language = $this->lang = $this->getParameter("lang", 'cs_CZ');
 
 		// Load default variables / options
 		$options = $this->context->getService("optionRepository");
