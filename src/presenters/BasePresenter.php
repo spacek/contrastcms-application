@@ -13,9 +13,7 @@ abstract class BasePresenter extends UI\Presenter
 	public $hostName = "";
 	public $lang;
 
-	public $enabledLanguages = [
-		"cs_CZ" => "Česky"
-	];
+	public $enabledLanguages = [];
 
 	public function startup()
 	{
@@ -27,6 +25,14 @@ abstract class BasePresenter extends UI\Presenter
 		$this->template->systemName = $this->configParams["application"]["systemName"] ?? "Contrast CMS";
 		$this->template->systemNameColor = $this->configParams["application"]["systemNameColor"] ?? "#ffffff";
 		$this->template->systemClaim = $this->configParams["application"]["systemClaim"] ?? "Mangaing your website have never been easier.";
+
+		$this->enabledLanguages = [
+			"cs_CZ" => "Česky"
+		];
+
+		if($this->configParams["application"]["enable_english"]) {
+			$this->enabledLanguages['en_US'] = 'English';
+		}
 
 		$this->lang = "cs_CZ";
 		$this->template->language = $this->lang;
