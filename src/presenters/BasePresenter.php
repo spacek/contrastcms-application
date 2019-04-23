@@ -14,6 +14,7 @@ abstract class BasePresenter extends UI\Presenter
 	public $lang;
 
 	public $enabledLanguages = [];
+	public $roles = [];
 
 	public function startup()
 	{
@@ -21,10 +22,16 @@ abstract class BasePresenter extends UI\Presenter
 
 		$this->configParams = $this->context->getParameters();
 
+		$defaultRoles = [
+			3 => 'Administrátor',
+			4 => 'Editor'
+		];
+
 		$this->template->systemImage = $this->configParams["application"]["systemImage"] ?? "img-29.jpg";
 		$this->template->systemName = $this->configParams["application"]["systemName"] ?? "Contrast CMS";
 		$this->template->systemNameColor = $this->configParams["application"]["systemNameColor"] ?? "#ffffff";
 		$this->template->systemClaim = $this->configParams["application"]["systemClaim"] ?? "Mangaing your website have never been easier.";
+		$this->roles = $this->configParams["application"]["roles"] ?? $defaultRoles;
 
 		$this->enabledLanguages = [
 			"cs_CZ" => "Česky"
