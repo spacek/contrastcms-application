@@ -63,8 +63,7 @@ class UserPresenter extends SecuredPresenter
 
 	protected function createComponentUserForm()
 	{
-		$form = new UserForm();
-		$this['userForm']['group_id']->setItems($this->roles);
+		$form = new UserForm(null, null, $this->roles);
 		$form->onSuccess[] = [$this, "processUserForm"];
 		return $form;
 	}

@@ -8,7 +8,7 @@ use Nette\ComponentModel\IContainer;
 final class UserForm extends Form
 {
 
-	public function __construct(IContainer $parent = NULL, $name = NULL)
+	public function __construct(IContainer $parent = NULL, $name = NULL, $roles = [])
 	{
 		parent::__construct($parent, $name);
 
@@ -23,10 +23,7 @@ final class UserForm extends Form
 		$this->addText('username', 'Uživatelské jméno:');
 		$this->addPassword('password', 'Heslo:');
 		$this->addText('email', 'E-mail:');
-		$this->addSelect("group_id", "Typ uživatelského účtu", [
-			3 => "Administrátor",
-			4 => "Editor"
-		]);
+		$this->addSelect("group_id", "Typ uživatelského účtu", $roles);
 
 		$this->addText('phone', 'Telefon:');
 		$this->addText('skype', 'Skype:');
