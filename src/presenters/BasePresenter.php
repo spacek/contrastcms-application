@@ -37,7 +37,7 @@ abstract class BasePresenter extends UI\Presenter
 			"cs_CZ" => "Česky"
 		];
 
-		if($this->configParams["application"]["enable_english"]) {
+		if(isset($this->configParams["application"]["enable_english"]) && $this->configParams["application"]["enable_english"]) {
 			$this->enabledLanguages['en_US'] = 'English';
 		}
 
