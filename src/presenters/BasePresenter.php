@@ -88,7 +88,6 @@ abstract class BasePresenter extends UI\Presenter
 		}
 
 		$this->template->enabledLanguages = $this->enabledLanguages;
-		$this->template->attachmentsProvider = $this->context->getService("postAttachmentRepository");
 		$this->template->files = $this->context->getService("fileRepository");
 
 		$this->template->addFilter("htmlTruncate", '\ContrastCms\Application\StringHelper::htmlTruncate');
