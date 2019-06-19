@@ -317,7 +317,9 @@
 		CKEDITOR.config.removeButtons = 'Underline';
 
 		$('.ckeditor').each(function () {
-			CKEDITOR.replace(this);
+			CKEDITOR.replace(this, {
+				customConfig: ''
+			});
 		});
 
 		$('.datepicker').datepicker({
