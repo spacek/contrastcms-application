@@ -314,15 +314,6 @@
 </script>
 <script type="text/javascript">
 	$(document).ready(function () {
-		CKEDITOR.config.allowedContent = true;
-		CKEDITOR.config.removeButtons = 'Underline';
-
-		$('.ckeditor').each(function () {
-			CKEDITOR.replace(this, {
-				customConfig: ''
-			});
-		});
-
 		$('.datepicker').datepicker({
 			format: 'yyyy/mm/dd',
 		});
