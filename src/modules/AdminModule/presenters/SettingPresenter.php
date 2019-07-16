@@ -2,6 +2,8 @@
 
 namespace ContrastCms\Application\AdminModule;
 
+use Nette\Application\UI\Form;
+
 class SettingPresenter extends SecuredPresenter
 {
 
@@ -18,7 +20,7 @@ class SettingPresenter extends SecuredPresenter
 		return $form;
 	}
 
-	public function processSettingForm(SettingForm $form)
+	public function processSettingForm(Form $form)
 	{
 		$values = $form->getValues();
 
