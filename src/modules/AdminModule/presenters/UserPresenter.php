@@ -25,6 +25,7 @@ class UserPresenter extends SecuredPresenter
 		$paginator->itemCount = $this->context->getService("userRepository")->count();
 
 		$this->template->results = $this->context->getService("userRepository")->find()->limit($paginator->itemsPerPage, $paginator->offset);
+		$this->template->roles = $this->roles;
 
 		$this->addComponent($vp, "vp");
 

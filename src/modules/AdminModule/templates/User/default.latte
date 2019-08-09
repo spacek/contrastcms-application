@@ -18,6 +18,7 @@
                                 <tr>
                                     <th class="first">Přihlašovací jméno</th>
                                     <th>Jméno a příjmení</th>
+                                    <th>Typ účtu</th>
                                     <th>Email</th>
                                     <th></th>
                                 </tr>
@@ -26,6 +27,7 @@
                                 <tr n:foreach="$results as $result" id="{$result->id}">
                                     <td>{$result->username}</td>
                                     <td>{$result->name} {$result->surname}</td>
+                                    <td>{$roles[$result->group_id]}</td>
                                     <td>{$result->email}</td>
                                     <td>
                                         <div class="mrg-top-10 text-center">
