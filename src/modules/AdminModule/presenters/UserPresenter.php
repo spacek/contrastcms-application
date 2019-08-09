@@ -14,7 +14,7 @@ class UserPresenter extends SecuredPresenter
 		$session = $this->context->getService("session");
 		$filter = $session->getSection("filter-user");
 		if (!$filter->limit) {
-			$filter->limit = 10;
+			$filter->limit = 1000;
 		}
 		$this->template->limit = $filter->limit;
 
