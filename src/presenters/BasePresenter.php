@@ -33,9 +33,7 @@ abstract class BasePresenter extends UI\Presenter
 		$this->template->systemClaim = $this->configParams["application"]["systemClaim"] ?? "Mangaing your website have never been easier.";
 		$this->roles = $this->configParams["application"]["roles"] ?? $defaultRoles;
 
-		$this->enabledLanguages = [
-			"cs_CZ" => "Česky"
-		];
+		$this->enabledLanguages =$this->configParams["application"]["languages"];
 
 		if(isset($this->configParams["application"]["enable_english"]) && $this->configParams["application"]["enable_english"]) {
 			$this->enabledLanguages['en_US'] = 'English';
