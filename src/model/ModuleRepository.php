@@ -2,27 +2,29 @@
 
 namespace ContrastCms\Application;
 
+use Nette\Security\User;
+
 class ModuleRepository extends Repository
 {
-	public function getEnabled()
-	{
-		$modules = $this->findBy(array('enabled' => 1), 'id ASC');
+    public function getEnabled()
+    {
+        $modules = $this->findBy(array('enabled' => 1), 'id ASC');
 
-		if ($modules) {
-			return $modules;
-		}
+        if ($modules) {
+            return $modules;
+        }
 
-		return array();
-	}
+        return array();
+    }
 
-	public function getTopMenu($parentId = 0)
-	{
-		$modules = $this->findBy(array('enabled' => 1, 'in_menu' => 1, 'parent_id' => $parentId), 'id ASC');
+    public function getTopMenu(User $user = null, $parentId = null)
+    {
+        $modules = $this->findBy(array('enabled' => 1, 'in_menu' => 1, 'parent_id' => $parentId), 'id ASC');
 
-		if ($modules) {
-			return $modules;
-		}
+        if ($modules) {
+            return $modules;
+        }
 
-		return array();
-	}
+        return array();
+    }
 }
