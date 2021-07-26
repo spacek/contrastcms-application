@@ -17,7 +17,7 @@ class ModuleRepository extends Repository
         return array();
     }
 
-    public function getTopMenu(User $user = null, $parentId = null)
+    public function getTopMenu(User $user = null, $parentId = 0)
     {
         $modules = $this->findBy(array('enabled' => 1, 'in_menu' => 1, 'parent_id' => $parentId), 'id ASC');
 
