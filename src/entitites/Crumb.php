@@ -2,9 +2,11 @@
 
 namespace ContrastCms\Application;
 
+use Nette\SmartObject;
+
 class Crumb {
 
-	use \Nette\SmartObject;
+	use SmartObject;
 
     public $postId;
     public $postUrl;
